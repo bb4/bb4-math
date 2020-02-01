@@ -1,0 +1,29 @@
+plugins {
+    id "com.github.maiflai.scalatest" version "0.25" // needed to run scala tests
+}
+description = 'Library of common mathematical methods'
+group = 'com.barrybecker4'
+version = '1.6-SNAPSHOT'
+
+apply from: 'https://raw.githubusercontent.com/bb4/bb4-common/master/bb4.gradle'
+
+project.archivesBaseName = 'bb4-math'
+mainClassName = 'com.barrybecker4.math.combinatorics.Combinator'
+
+
+dependencies {
+    //compile 'com.barrybecker4:bb4-ui:1.6-SNAPSHOT'
+}
+
+jar {
+    archiveName = "${archivesBaseName}-${version}.jar"
+    manifest {
+        attributes 'Implementation-Title': '<project code>',
+                'Implementation-Version': version,
+                'provider': 'gradle',
+                'Main-Class': mainClassName
+    }
+}
+
+// This allows publishing of this project library to Sonatype
+apply from: 'https://raw.githubusercontent.com/bb4/bb4-common/master/bb4-publish.gradle'
