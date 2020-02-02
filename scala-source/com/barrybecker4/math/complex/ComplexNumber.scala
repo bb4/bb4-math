@@ -1,8 +1,9 @@
 /* Copyright by Barry G. Becker, 2000-2019. Licensed under MIT License: http://www.opensource.org/licenses/MIT */
-package com.barrybecker4.math
+package com.barrybecker4.math.complex
 
 /**
   * A Complex number is comprised of real and imaginary parts of the form a + bi.
+ *
   * @author Barry Becker
   */
 object ComplexNumber {

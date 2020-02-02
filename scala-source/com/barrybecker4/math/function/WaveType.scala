@@ -1,5 +1,5 @@
 /* Copyright by Barry G. Becker, 2000-2018. Licensed under MIT License: http://www.opensource.org/licenses/MIT */
-package com.barrybecker4.math
+package com.barrybecker4.math.function
 
 object WaveType {
   val VALUES = Array(SINE_WAVE, SQUARE_WAVE, SAWTOOTH_WAVE, TRIANGLE_WAVE3)

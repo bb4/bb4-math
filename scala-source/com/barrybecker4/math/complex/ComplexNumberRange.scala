@@ -1,8 +1,8 @@
-/* Copyright by Barry G. Becker, 2000-2018. Licensed under MIT License: http://www.opensource.org/licenses/MIT */
-package com.barrybecker4.math
+package com.barrybecker4.math.complex
 
 /**
   * A complex number range represents a box on the complex plane.
+ *
   * @param point1 one value for range
   * @param point2 other value for range
   * @author Barry Becker

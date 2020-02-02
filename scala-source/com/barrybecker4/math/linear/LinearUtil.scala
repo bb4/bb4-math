@@ -1,11 +1,11 @@
-/* Copyright by Barry G. Becker, 2000-2018. Licensed under MIT License: http://www.opensource.org/licenses/MIT */
-package com.barrybecker4.math
+package com.barrybecker4.math.linear
 
 import javax.vecmath.{GMatrix, GVector, Vector2d}
 
 /**
-  * This class implements a number of static utility functions that are useful for math.
-  * Mostly linear algebra matrix solvers and the like.
+  * This class implements a number of static utility functions that are useful for linear algebra/
+  * Among other things there is a  conjugate gradient matrix solver.
+ *
   * @author Barry Becker
   */
 object LinearUtil {

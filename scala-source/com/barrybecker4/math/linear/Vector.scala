@@ -1,8 +1,10 @@
-/* Copyright by Barry G. Becker, 2000-2018. Licensed under MIT License: http://www.opensource.org/licenses/MIT */
-package com.barrybecker4.math
+package com.barrybecker4.math.linear
+
+import com.barrybecker4.math.MathUtil
 
 /**
-  * Represents an immutable n dimensional vector.
+  * Represents an immutable N dimensional vector.
+ *
   * @author Barry Becker
   */
 case class Vector(data: IndexedSeq[Double]) {

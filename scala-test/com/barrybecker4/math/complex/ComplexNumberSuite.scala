@@ -1,5 +1,5 @@
 /* Copyright by Barry G. Becker, 2000-2018. Licensed under MIT License: http://www.opensource.org/licenses/MIT */
-package com.barrybecker4.math
+package com.barrybecker4.math.complex
 
 import org.scalatest.FunSuite
 
@@ -41,7 +41,7 @@ class ComplexNumberSuite extends FunSuite {
       ComplexNumber.pow(5, ComplexNumber(3, 2)) }
   }
   test("4^(3+0i)") {
-    assertResult(ComplexNumber(64, 0)) { ComplexNumber.pow(4, ComplexNumber(3)) }
+    assertResult(ComplexNumber(64)) { ComplexNumber.pow(4, ComplexNumber(3)) }
   }
   test("3^(0+i)") {
     assertResult(ComplexNumber(0.4548324228266097, 0.8905770416677471)) {
@@ -52,7 +52,7 @@ class ComplexNumberSuite extends FunSuite {
       ComplexNumber.pow(2, ComplexNumber(1, Math.PI / 2.0)) }
   }
   test("1^(0+(pi)i)") {
-    assertResult(ComplexNumber(1, 0)) { ComplexNumber.pow(1, ComplexNumber(0, Math.PI)) }
+    assertResult(ComplexNumber(1)) { ComplexNumber.pow(1, ComplexNumber(0, Math.PI)) }
   }
 
   test("magnitude") {
@@ -66,7 +66,7 @@ class ComplexNumberSuite extends FunSuite {
 
   test("1 / (2, 3i) divide") {
     assertResult(ComplexNumber(0.15384615384615385, -0.23076923076923078)) {
-      ComplexNumber(1, 0).divide(ComplexNumber(2, 3)) }
+      ComplexNumber(1).divide(ComplexNumber(2, 3)) }
   }
 
   test("(2 + 2i) / (2, 3i) divide") {
@@ -76,7 +76,7 @@ class ComplexNumberSuite extends FunSuite {
 
   test("2 / (2, 3i) divide") {
     assertResult(ComplexNumber(0.3076923076923077, -0.46153846153846156)) {
-      ComplexNumber(2, 0).divide(ComplexNumber(2, 3)) }
+      ComplexNumber(2).divide(ComplexNumber(2, 3)) }
   }
 
   test("(3 + 3i) / (2, 3i) divide") {
@@ -100,7 +100,7 @@ class ComplexNumberSuite extends FunSuite {
   }
 
   test("3 ^ 2 ") {
-    assertResult(ComplexNumber(9, 0)) {
+    assertResult(ComplexNumber(9)) {
       ComplexNumber(3).pow(2) }
   }
 
