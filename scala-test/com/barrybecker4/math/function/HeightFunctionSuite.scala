@@ -8,37 +8,31 @@ import org.scalatest.FunSuite
 /**
   * @author Barry Becker
   */
-class HeightFunctionSuite extends FunSuite {
+class HeightFunctionSuite extends BaseFunctionSuite {
 
-  implicit val doubleEq: Equality[Double] = TolerantNumerics.tolerantDoubleEquality(0.000001)
   /** instance under test */
   private var func: HeightFunction = _
 
   test("TypicalFunc(") {
+
     func = new HeightFunction(Array[Double](.2, 0.3, 0.6, 0.7, 0.5, 0.3, 0.11, 0.04, -0.1, -0.15), Range(1, 20))
-    assert(0.2 === func.getValue(1))
-    assert(0.4473684 === func.getValue(10))
-    assert(0.065789 === func.getValue(15))
-    assert(-0.15 === func.getValue(20))
+    val exp = Array(0.2, 0.4473684, 0.065789, -0.15)
+    val act = Array(1, 10, 15, 20).map(x => func.getValue(x.toDouble))
+    verify(exp, act)
   }
 
   test("Base0Func") {
     func = new HeightFunction(Array[Double](.2, 0.31, 0.6, 0.7, 0.5, 0.3, 0.11, 0.04, -0.1, -0.15), Range(0, 9))
-    assert(0.2 === func.getValue(0))
-    assert(0.31 === func.getValue(1))
-    assert(0.5 === func.getValue(4))
-    assert(0.04 === func.getValue(7))
-    assert(-0.15 === func.getValue(9))
+    val exp = Array(0.2, 0.31, 0.5, 0.04, -0.15)
+    val act = Array(0, 1, 4, 7, 9).map(x => func.getValue(x.toDouble))
+    verify(exp, act)
   }
 
   test("FuncFromRangeToBinsPositiveOffset") {
     func = new HeightFunction(Array[Double](.2, 0.3, 0.6, 0.7, 0.5, 0.2), Range(100, 500))
-    assert(0.2 === func.getValue(100))
-    assert(0.225 === func.getValue(120))
-    assert(0.3 === func.getValue(180))
-    assert(0.20375 === func.getValue(499))
-    assert(0.4875 === func.getValue(230))
-    assert(0.2 === func.getValue(500))
+    val exp = Array(0.2, 0.225, 0.3, 0.20375, 0.4875, 0.2)
+    val act = Array(100, 120, 180, 499, 230, 500).map(x => func.getValue(x.toDouble))
+    verify(exp, act)
   }
 
   test("FuncFromRangeToBinsOutOfRange") {

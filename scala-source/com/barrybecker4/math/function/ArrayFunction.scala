@@ -7,7 +7,8 @@ import com.barrybecker4.math.interpolation.{InterpolationMethod, LINEAR}
 /**
   * The function is represented with an array of lookups that
   * can be interpolated using some method.
-  * @param functionMap the linear function lookup table.
+  * @param functionMap the linear function lookup table. Define y values
+  *                    for a set of equally spaced x values in the range [0, 1]
   * @param inverseFunctionMap The inverse lookup for the main function.
   * @param interpMethod method to use for interpolating array values
   * @author Barry Becker
@@ -21,6 +22,7 @@ class ArrayFunction(val functionMap: Array[Double],
 
   /** Alternative constructor.
     * @param func the array representing function values. It must be monotonically increasing in this case.
+    *             The last y value in the array must be 1.
     * @param interpMethod method to use when interpolating
     */
   def this(func: Array[Double], interpMethod: InterpolationMethod = LINEAR) {

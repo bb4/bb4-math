@@ -1,26 +1,23 @@
-/*
- * Copyright by Barry G. Becker, 2000-2018. Licensed under MIT License: http://www.opensource.org/licenses/MIT
- */
-
+/* Copyright by Barry G. Becker, 2000-2018. Licensed under MIT License: http://www.opensource.org/licenses/MIT */
 package com.barrybecker4.math.function
 
-import org.scalactic.{Equality, TolerantNumerics}
-import org.scalatest.FunSuite
 
 /**
   * @author Barry Becker
   */
-class CountFunctionSuite extends FunSuite {
+class CountFunctionSuite extends BaseFunctionSuite {
+
   /** instance under test */
   private var func: CountFunction = _
-  private implicit val doubleEq: Equality[Double] =
-    TolerantNumerics.tolerantDoubleEquality(0.0000001)
+
 
   test("BehaviorAfterConstruction")  {
+
     func = new CountFunction(0.3)
-    assert(func.getValue(0) === 0.3)
-    assert(func.getValue(10) === 0.3)
-    assert(func.getValue(80) === 0.3)
+
+    val exp = Array(0.3, 0.3, 0.3)
+    val act: Array[Double] = Array[Int](0, 10, 80).map(_.toDouble).map(func.getValue)
+    verify(exp, act)
   }
 
   /** note that x values are normalized to 0 - 1 range.  */

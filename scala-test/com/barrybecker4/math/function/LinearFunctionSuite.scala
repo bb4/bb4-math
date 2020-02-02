@@ -2,17 +2,14 @@
 package com.barrybecker4.math.function
 
 import com.barrybecker4.math.Range
-import org.scalactic.{Equality, TolerantNumerics}
-import org.scalatest.FunSuite
 
 
 /**
   * @author Barry Becker
   */
-class LinearFunctionSuite extends FunSuite {
+class LinearFunctionSuite extends BaseFunctionSuite {
   /** instance under test */
   private var func: LinearFunction = _
-  implicit val doubleEq: Equality[Double] = TolerantNumerics.tolerantDoubleEquality(0.0000001)
 
   test("TypicalFunc") {
     func = new LinearFunction(1 / 10.0)
