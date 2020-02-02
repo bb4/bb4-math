@@ -1,6 +1,6 @@
 # bb4-math
 
-This library project mathe oriented code for bb4 projects.
+This library project math oriented code for bb4 projects.
 
 To use, include this dependency in your gradle file
 
