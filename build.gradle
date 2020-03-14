@@ -4,25 +4,15 @@ plugins {
 description = 'Library of common mathematical methods'
 group = 'com.barrybecker4'
 version = '1.6-SNAPSHOT'
+ext {
+    archivesBaseName = 'bb4-math'
+    mainClass = 'com.barrybecker4.math.combinatorics.Combinator'
+}
 
 apply from: 'https://raw.githubusercontent.com/bb4/bb4-common/master/bb4.gradle'
 
-project.archivesBaseName = 'bb4-math'
-mainClassName = 'com.barrybecker4.math.combinatorics.Combinator'
-
-
 dependencies {
     //compile 'com.barrybecker4:bb4-ui:1.6-SNAPSHOT'
-}
-
-jar {
-    archiveName = "${archivesBaseName}-${version}.jar"
-    manifest {
-        attributes 'Implementation-Title': '<project code>',
-                'Implementation-Version': version,
-                'provider': 'gradle',
-                'Main-Class': mainClassName
-    }
 }
 
 // This allows publishing of this project library to Sonatype
