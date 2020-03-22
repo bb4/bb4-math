@@ -1,5 +1,5 @@
 plugins {
-    id "com.github.maiflai.scalatest" version "0.25" // needed to run scala tests
+    id "com.github.maiflai.scalatest" version "0.26" // needed to run scala tests
 }
 description = 'Library of common mathematical methods'
 group = 'com.barrybecker4'
@@ -12,7 +12,6 @@ ext {
 apply from: 'https://raw.githubusercontent.com/bb4/bb4-common/master/bb4.gradle'
 
 dependencies {
-    //compile 'com.barrybecker4:bb4-ui:1.6-SNAPSHOT'
 }
 
 // This allows publishing of this project library to Sonatype
