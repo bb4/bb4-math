@@ -9,7 +9,7 @@ case class Range(min: Double = Double.NaN, max: Double = Double.NaN) {
 
   assert(min.isNaN && max.isNaN || min <= max)
 
-  def this(range: Range) { this(range.min, range.max) }
+  def this(range: Range) = { this(range.min, range.max) }
 
   /** @return new range extending the current one by specified range. */
   def add(range: Range): Range = add(range.min).add(range.max)

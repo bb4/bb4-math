@@ -19,7 +19,7 @@ class CutPointGenerator(val useTightLabeling: Boolean, val formatter: DecimalFor
   /** If true, show the precise min/max values at the extreme cut points (tight), else loose labels */
   private var cutPointFinder: AbstractCutPointFinder = _
 
-  def this() {
+  def this() = {
     this(true, new DecimalFormat("###,###.##"))
   }
 

@@ -28,7 +28,7 @@ class Permuter(val num: Int) extends Iterator[List[Int]] {
   override def hasNext: Boolean = hasMore
 
   /** @return the next permutation*/
-  override def next: List[Int] = {
+  override def next(): List[Int] = {
     val permutation = lastPermutation
     val nextPermutation = lastPermutation.clone()
     var k = nextPermutation.size - 2

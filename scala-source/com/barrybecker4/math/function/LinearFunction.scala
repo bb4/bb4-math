@@ -22,7 +22,7 @@ class LinearFunction(scale: Double, offset: Double = 0) extends InvertibleFuncti
     * @param range the range of the domain. From min  to max value.
     * @param numBins number of bins to map to.
     */
-  def this(range: Range, numBins: Int) {
+  def this(range: Range, numBins: Int) = {
     this(numBins / range.getExtent, -range.min * (numBins / range.getExtent))
     if (numBins == 0) throw new IllegalArgumentException("numBins cannot be 0.")
     if (scale == 0) throw new IllegalArgumentException("scale cannot be 0.")

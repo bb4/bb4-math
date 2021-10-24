@@ -25,7 +25,7 @@ class ArrayFunction(val functionMap: Array[Double],
     *             The last y value in the array must be 1.
     * @param interpMethod method to use when interpolating
     */
-  def this(func: Array[Double], interpMethod: InterpolationMethod = LINEAR) {
+  def this(func: Array[Double], interpMethod: InterpolationMethod = LINEAR) = {
     this(func, new FunctionInverter(func).createInverseFunction(Range(0, 1.0)), interpMethod)
   }
 
@@ -33,7 +33,7 @@ class ArrayFunction(val functionMap: Array[Double],
     * want to compute it (because computing it will not be as accurate).
     * @param func function definition.
     */
-  def this(func: Array[Double], inverseFunc: Array[Double]) {
+  def this(func: Array[Double], inverseFunc: Array[Double]) = {
     this(func, inverseFunc, LINEAR)
   }
 

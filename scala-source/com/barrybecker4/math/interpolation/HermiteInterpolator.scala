@@ -7,7 +7,7 @@ package com.barrybecker4.math.interpolation
 class HermiteInterpolator(function: Array[Double], var tension: Double, var bias: Double)
   extends AbstractSmoothInterpolator(function) {
 
-  def this(function: Array[Double]) {
+  def this(function: Array[Double]) = {
     this(function, 0, 0)
   }
 

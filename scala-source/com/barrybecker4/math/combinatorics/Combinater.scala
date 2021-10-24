@@ -30,7 +30,7 @@ class Combinater(num: Int) extends Iterator[List[Int]] {
   override def hasNext: Boolean = hasMore
 
   /** @return the next permutation */
-  override def next: List[Int] = {
+  override def next(): List[Int] = {
     counter += 1
     if (!hasMore)
       throw new NoSuchElementException("There are no more combinations. There were only " + numCombinations)

@@ -84,7 +84,7 @@ object ComplexNumber {
 
 case class ComplexNumber(real: Double, imaginary: Double = 0) {
 
-  def this(c: ComplexNumber) { this(c.real, c.imaginary) }
+  def this(c: ComplexNumber) = { this(c.real, c.imaginary) }
 
   /** @return the magnitude of a complex number. ie.e distance from origin */
   def getMagnitude: Double = Math.sqrt(real * real + imaginary * imaginary)
