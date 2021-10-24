@@ -14,7 +14,7 @@ plugins {
 }
 description = 'Library of common mathematical methods'
 group = 'com.barrybecker4'
-version = '1.6-SNAPSHOT'
+version = '1.6'
 ext {
     archivesBaseName = 'bb4-math'
     mainClass = 'com.barrybecker4.math.combinatorics.Combinator'
