@@ -2,13 +2,14 @@
 package com.barrybecker4.math.function
 
 import org.scalactic.{Equality, TolerantNumerics}
-import org.scalatest.{BeforeAndAfterEach, FunSuite}
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.{BeforeAndAfterEach}
 
 /**
   * Base test class for function classes.
   * @author Barry Becker
   */
-abstract class FunctionSuiteBase extends FunSuite with BeforeAndAfterEach {
+abstract class FunctionSuiteBase extends AnyFunSuite with BeforeAndAfterEach {
 
   /** function class under test. */
   protected var function: InvertibleFunction = _

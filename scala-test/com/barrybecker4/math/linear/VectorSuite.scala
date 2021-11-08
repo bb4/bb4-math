@@ -3,13 +3,13 @@ package com.barrybecker4.math.linear
 
 import com.barrybecker4.math.{MathUtil, linear}
 import org.scalactic.{Equality, TolerantNumerics}
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 
 
 /**
   * @author Barry Becker
   */
-class VectorSuite extends FunSuite {
+class VectorSuite extends AnyFunSuite {
   /** instance under test */
   private var vector: linear.Vector = _
 

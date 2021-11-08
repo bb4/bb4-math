@@ -52,10 +52,10 @@ class ConjugateGradientSolver(var matrix: GMatrix, var b: GVector) {
     val matrixMultp = new GVector(p)
     val matrixInverse = new GMatrix(matrix)
     matrixInverse.invert()
-    var error = .0
+    var error = 1.0
     var norm = .0
     var iteration = 0
-    do {
+    while (error > eps && iteration < maxIterations) {
       matrixMultp.mul(matrix, p)
       val lambda = r.dot(p) / p.dot(matrixMultp)
       xnew.scaleAdd(lambda, p, x)
@@ -73,7 +73,7 @@ class ConjugateGradientSolver(var matrix: GMatrix, var b: GVector) {
       //System.out.println("xi = "+x.toString());
       iteration += 1
       //System.out.println("The error for iteration " + iteration + " is : " + error );
-    } while (error > eps && iteration < maxIterations)
+    }
 
     if (error > eps || error.isNaN || error.isInfinite) { // something went wrong
       throw new IllegalStateException("Unable to converge on a solution. Error = " + error)

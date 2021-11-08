@@ -1,13 +1,15 @@
 /* Copyright by Barry G. Becker, 2000-2018. Licensed under MIT License: http://www.opensource.org/licenses/MIT */
 package com.barrybecker4.math
 
+import org.scalatest.funsuite.AnyFunSuite
+
 import javax.vecmath.Point2d
-import org.scalatest.FunSuite
+
 
 /**
   * @author Barry Becker
   */
-class MathUtilSuite extends FunSuite {
+class MathUtilSuite extends AnyFunSuite {
   test("PositiveGCD") {
     assertResult(21) {MathUtil.gcd(21, 42)}
     assertResult(1) {MathUtil.gcd(21, 4L)}

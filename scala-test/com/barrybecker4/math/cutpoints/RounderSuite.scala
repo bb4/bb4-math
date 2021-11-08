@@ -6,7 +6,8 @@ package com.barrybecker4.math.cutpoints
 
 import com.barrybecker4.math.cutpoints.RounderSuite.EPS
 import org.scalactic.{Equality, TolerantNumerics}
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
+
 
 /**
   * @author Barry Becker
@@ -15,7 +16,7 @@ object RounderSuite {
   private val EPS = 0.00001
 }
 
-class RounderSuite extends FunSuite {
+class RounderSuite extends AnyFunSuite {
 
   implicit val doubleEq: Equality[Double] = TolerantNumerics.tolerantDoubleEquality(EPS)
 

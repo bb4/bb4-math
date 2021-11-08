@@ -1,12 +1,13 @@
 /* Copyright by Barry G. Becker, 2000-2018. Licensed under MIT License: http://www.opensource.org/licenses/MIT */
 package com.barrybecker4.math.complex
 
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
+
 
 /**
   * @author Barry Becker
   */
-class ComplexNumberSuite extends FunSuite {
+class ComplexNumberSuite extends AnyFunSuite {
 
   test("construction") {
     assertResult("1.0 + 1.0i") {ComplexNumber(1, 1).toString}

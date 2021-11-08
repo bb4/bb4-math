@@ -1,12 +1,13 @@
 /* Copyright by Barry G. Becker, 2000-2018. Licensed under MIT License: http://www.opensource.org/licenses/MIT */
 package com.barrybecker4.math.multiarray
 
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
+
 
 /**
   * @author Barry Becker
   */
-class MultiDimensionalIndexerSuite extends FunSuite {
+class MultiDimensionalIndexerSuite extends AnyFunSuite {
   
   /** instance under test */
   private var indexer: MultiDimensionalIndexer = _

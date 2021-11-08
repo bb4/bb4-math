@@ -2,13 +2,13 @@
 package com.barrybecker4.math.cutpoints
 
 import com.barrybecker4.math.Range
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 
 
 /**
   * @author Barry Becker
   */
-class TightCutPointFinderSuite extends FunSuite {
+class TightCutPointFinderSuite extends AnyFunSuite {
 
   private val finder = new TightCutPointFinder
 

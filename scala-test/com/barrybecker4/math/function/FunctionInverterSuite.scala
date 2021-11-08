@@ -2,12 +2,13 @@
 package com.barrybecker4.math.function
 
 import com.barrybecker4.math.{MathUtil, Range}
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
+
 
 /**
   * @author Barry Becker
   */
-class FunctionInverterSuite extends FunSuite {
+class FunctionInverterSuite extends AnyFunSuite {
   /** instance under test. */
   private var inverter: FunctionInverter = _
 

@@ -2,12 +2,13 @@
 package com.barrybecker4.math.interpolation
 
 import org.scalactic.{Equality, TolerantNumerics}
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
+
 
 /**
   * @author Barry Becker
   */
-abstract class InterpolatorSuiteBase extends FunSuite {
+abstract class InterpolatorSuiteBase extends AnyFunSuite {
 
   /** interpolation class under test. */
   protected var interpolator: Interpolator = _

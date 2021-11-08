@@ -3,7 +3,7 @@ package com.barrybecker4.math.cutpoints
 
 import com.barrybecker4.math.Range
 import com.barrybecker4.math.cutpoints.NiceNumbersSuite._
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 
 /**
   * @author Barry Becker
@@ -21,7 +21,7 @@ object NiceNumbersSuite {
   private val EXPECTED_TIGHT_CUTS4 = Array("-1.48", "-1", "-0.5", "0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "4.61")
 }
 
-class NiceNumbersSuite extends FunSuite {
+class NiceNumbersSuite extends AnyFunSuite {
   /** instance under test */
   private val generator = new CutPointGenerator
 

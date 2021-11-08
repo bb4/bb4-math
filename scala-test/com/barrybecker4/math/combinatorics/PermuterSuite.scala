@@ -1,12 +1,13 @@
 /* Copyright by Barry G. Becker, 2000-2018. Licensed under MIT License: http://www.opensource.org/licenses/MIT */
 package com.barrybecker4.math.combinatorics
 
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
+
 
 /**
   * @author Barry Becker
   */
-class PermuterSuite extends FunSuite {
+class PermuterSuite extends AnyFunSuite {
   /** instance under test */
   private var permuter: Permuter = _
 
@@ -18,15 +19,15 @@ class PermuterSuite extends FunSuite {
   test("Permute1") {
     permuter = new Permuter(1)
     assert(permuter.hasNext)
-    assertResult(List(0)) { permuter.next }
+    assertResult(List(0)) { permuter.next() }
     assert(!permuter.hasNext)
   }
 
   test("Permute2") {
     permuter = new Permuter(2)
     assert(permuter.hasNext)
-    assertResult(List(0, 1)) { permuter.next }
-    assertResult(List(1, 0)) { permuter.next }
+    assertResult(List(0, 1)) { permuter.next() }
+    assertResult(List(1, 0)) { permuter.next() }
     assert(!permuter.hasNext)
   }
 
@@ -34,12 +35,12 @@ class PermuterSuite extends FunSuite {
   test("Permute3") {
     permuter = new Permuter(3)
     assert(permuter.hasNext)
-    assertResult(List(0, 1, 2)) { permuter.next }
-    assertResult(List(0, 2, 1)) { permuter.next }
-    assertResult(List(1, 0, 2)) { permuter.next }
-    assertResult(List(1, 2, 0)) { permuter.next }
-    assertResult(List(2, 0, 1)) { permuter.next }
-    assertResult(List(2, 1, 0)) { permuter.next }
+    assertResult(List(0, 1, 2)) { permuter.next() }
+    assertResult(List(0, 2, 1)) { permuter.next() }
+    assertResult(List(1, 0, 2)) { permuter.next() }
+    assertResult(List(1, 2, 0)) { permuter.next() }
+    assertResult(List(2, 0, 1)) { permuter.next() }
+    assertResult(List(2, 1, 0)) { permuter.next() }
     assert(!permuter.hasNext)
   }
 
@@ -47,11 +48,11 @@ class PermuterSuite extends FunSuite {
   test("Permute5") {
     permuter = new Permuter(5)
     assert(permuter.hasNext)
-    assertResult(List(0, 1, 2, 3, 4)) { permuter.next }
+    assertResult(List(0, 1, 2, 3, 4)) { permuter.next() }
 
     for (i <- 0 until 119)
-      permuter.next
-    assertResult(List(4, 3, 2, 1, 0)) { permuter.next }
+      permuter.next()
+    assertResult(List(4, 3, 2, 1, 0)) { permuter.next() }
     assert(!permuter.hasNext)
   }
 
@@ -59,18 +60,18 @@ class PermuterSuite extends FunSuite {
   test("PermuteReallyBig") {
     permuter = new Permuter(10)
     assert(permuter.hasNext)
-    permuter.next
-    assertResult(10) { permuter.next.size }
+    permuter.next()
+    assertResult(10) { permuter.next().size }
     assert(permuter.hasNext)
   }
 
   test("PermuteReallyReallyBig") {
     permuter = new Permuter(20)
     assert(permuter.hasNext)
-    permuter.next
-    assertResult(20) { permuter.next.size }
-    assertResult(List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 17, 19)) {permuter.next}
-    assertResult(List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 17)) {permuter.next}
+    permuter.next()
+    assertResult(20) { permuter.next().size }
+    assertResult(List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 17, 19)) { permuter.next() }
+    assertResult(List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 17)) { permuter.next() }
     assert(permuter.hasNext)
   }
 

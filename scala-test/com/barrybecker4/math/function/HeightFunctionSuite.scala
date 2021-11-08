@@ -2,8 +2,7 @@
 package com.barrybecker4.math.function
 
 import com.barrybecker4.math.Range
-import org.scalactic.{Equality, TolerantNumerics}
-import org.scalatest.FunSuite
+
 
 /**
   * @author Barry Becker

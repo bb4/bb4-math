@@ -2,7 +2,7 @@
 package com.barrybecker4.math
 
 import org.scalactic.{Equality, TolerantNumerics}
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 
 
 /**
@@ -12,7 +12,7 @@ object RangeSuite {
   val TOL = 0.000000000001
 }
 
-class RangeSuite extends FunSuite {
+class RangeSuite extends AnyFunSuite {
   /** instance under test */
   private var range: Range = _
 

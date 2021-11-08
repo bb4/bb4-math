@@ -2,7 +2,7 @@
 package com.barrybecker4.math.cutpoints
 
 import com.barrybecker4.math.cutpoints.NiceNumberRounderSuite._
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 
 
 object NiceNumberRounderSuite {
@@ -21,7 +21,7 @@ object NiceNumberRounderSuite {
 /**
   * @author Barry Becker
   */
-class NiceNumberRounderSuite extends FunSuite {
+class NiceNumberRounderSuite extends AnyFunSuite {
 
   //implicit val doubleEq = TolerantNumerics.tolerantDoubleEquality(TOLERANCE)
 

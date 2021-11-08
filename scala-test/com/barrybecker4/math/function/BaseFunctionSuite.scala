@@ -1,9 +1,10 @@
 package com.barrybecker4.math.function
 
 import org.scalactic.{Equality, TolerantNumerics}
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 
-trait BaseFunctionSuite extends FunSuite {
+
+trait BaseFunctionSuite extends AnyFunSuite {
 
   implicit val doubleEq: Equality[Double] = TolerantNumerics.tolerantDoubleEquality(0.000001)
 

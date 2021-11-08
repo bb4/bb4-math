@@ -1,10 +1,10 @@
 package com.barrybecker4.math.linear
 
+import org.scalatest.funsuite.AnyFunSuite
 import javax.vecmath.Vector2d
-import org.scalatest.FunSuite
 
 
-class LinearUtilSuite extends FunSuite {
+class LinearUtilSuite extends AnyFunSuite {
 
   test("distance") {
     assertResult(3.605551275463989) {
