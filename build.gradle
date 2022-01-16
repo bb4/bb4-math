@@ -5,7 +5,7 @@ buildscript {
         maven { url "https://oss.sonatype.org/content/repositories/releases" }
     }
     dependencies {
-        classpath 'com.barrybecker4:bb4-gradle:1.7-SNAPSHOT'
+        classpath 'com.barrybecker4:bb4-gradle:1.8-SNAPSHOT'
     }
 }
 
@@ -14,7 +14,7 @@ plugins {
 }
 description = 'Library of common mathematical methods'
 group = 'com.barrybecker4'
-version = '1.7-SNAPSHOT'
+version = '1.7'
 ext {
     archivesBaseName = 'bb4-math'
     mainClass = 'com.barrybecker4.math.combinatorics.Combinator'
