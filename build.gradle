@@ -10,7 +10,7 @@ buildscript {
 }
 
 plugins {
-    id "com.github.maiflai.scalatest" version "0.31" // needed to run scala tests
+    id "com.github.maiflai.scalatest" version "0.32" // needed to run scala tests
 }
 description = 'Library of common mathematical methods'
 group = 'com.barrybecker4'
