@@ -6,12 +6,14 @@ import scala.collection.mutable.ArrayBuffer
 
 /**
   * Provides a way of iterating through all the combinations of a set of N integers.
-  * For example, if N = 3, then the set of N integers is {0, 1, 2} and the all subsets are
-  * {0}, {1}, {0, 1}, {2}, {2, 0}, {2, 1}, {2, 1, 0}
+  * For example, if N = 3, then the set of N integers is [0, 1, 2] and the all subsets are
+  * <pre>
+  * [0], [1], [0, 1], {2}, [2, 0], [2, 1], [2, 1, 0]
+  * </pre>
   * Note that the order of the elements in the subsets does not matter.
   * The implementation does not require memory for storing the permutations since  only one is produced at a time.
   * This algorithm will only work as long as the number of subsets is less than Long.MAX_VALUE.
-  * In other words, N must be less than 60 since 2&caret;60 is close to Long.MAX_VALUE.
+  * In other words, N must be less than 60 since pow(2, 60) is close to Long.MAX_VALUE.
   * @param num the number of integer elements to permute.
   * @author Barry Becker
   */
