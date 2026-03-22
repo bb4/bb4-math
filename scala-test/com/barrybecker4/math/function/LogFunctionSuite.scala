@@ -1,12 +1,14 @@
 /* Copyright by Barry G. Becker, 2000-2018. Licensed under MIT License: http://www.opensource.org/licenses/MIT */
 package com.barrybecker4.math.function
 
+import scala.compiletime.uninitialized
+
 /**
   * @author Barry Becker
   */
 class LogFunctionSuite extends BaseFunctionSuite {
   /** instance under test */
-  private var func: LogFunction = _
+  private var func: LogFunction = uninitialized
 
   test("TypicalFunc") {
     func = new LogFunction(10.0)

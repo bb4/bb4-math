@@ -1,6 +1,7 @@
 /* Copyright by Barry G. Becker, 2000-2018. Licensed under MIT License: http://www.opensource.org/licenses/MIT */
 package com.barrybecker4.math.function
 
+import scala.compiletime.uninitialized
 
 /**
   * @author Barry Becker
@@ -8,7 +9,7 @@ package com.barrybecker4.math.function
 class CountFunctionSuite extends BaseFunctionSuite {
 
   /** instance under test */
-  private var func: CountFunction = _
+  private var func: CountFunction = uninitialized
 
 
   test("BehaviorAfterConstruction")  {

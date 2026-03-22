@@ -2,7 +2,7 @@
 package com.barrybecker4.math.function
 
 import com.barrybecker4.math.Range
-
+import scala.compiletime.uninitialized
 
 /**
   * @author Barry Becker
@@ -10,7 +10,7 @@ import com.barrybecker4.math.Range
 class HeightFunctionSuite extends BaseFunctionSuite {
 
   /** instance under test */
-  private var func: HeightFunction = _
+  private var func: HeightFunction = uninitialized
 
   test("TypicalFunc(") {
 

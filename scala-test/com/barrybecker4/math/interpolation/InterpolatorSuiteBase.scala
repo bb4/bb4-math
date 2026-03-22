@@ -3,6 +3,7 @@ package com.barrybecker4.math.interpolation
 
 import org.scalactic.{Equality, TolerantNumerics}
 import org.scalatest.funsuite.AnyFunSuite
+import scala.compiletime.uninitialized
 
 
 /**
@@ -11,7 +12,7 @@ import org.scalatest.funsuite.AnyFunSuite
 abstract class InterpolatorSuiteBase extends AnyFunSuite {
 
   /** interpolation class under test. */
-  protected var interpolator: Interpolator = _
+  protected var interpolator: Interpolator = uninitialized
   implicit val doubleEq: Equality[Double] = TolerantNumerics.tolerantDoubleEquality(0.000001)
 
   protected def createInterpolator(func: Array[Double]): Interpolator

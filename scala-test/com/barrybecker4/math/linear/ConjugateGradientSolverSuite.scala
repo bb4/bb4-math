@@ -2,9 +2,10 @@
 package com.barrybecker4.math.linear
 
 import javax.vecmath.{GMatrix, GVector, MismatchedSizeException}
-import org.junit.Assert.assertTrue
+import org.junit.jupiter.api.Assertions.assertTrue
 import ConjugateGradientSolverSuite.MATRIX_4x4
 import org.scalatest.funsuite.AnyFunSuite
+import scala.compiletime.uninitialized
 
 /**
   * @author Barry Becker
@@ -15,7 +16,7 @@ object ConjugateGradientSolverSuite {
 
 class ConjugateGradientSolverSuite extends AnyFunSuite {
   /** instance under test */
-  var solver: ConjugateGradientSolver = _
+  var solver: ConjugateGradientSolver = uninitialized
 
   test("solveSimple2by2System(") {
     val A = new GMatrix(2, 2, Array[Double](4, 1, 1, 3))
@@ -43,7 +44,7 @@ class ConjugateGradientSolverSuite extends AnyFunSuite {
     val solution = solver.solve
     System.out.println("Solution = " + solution)
     val expectedSolution = new GVector(Array[Double](0.588235329, -0.76470588, 0.176470588, 1.098039215))
-    assertTrue("Unexpected solution:" + solution, LinearUtil.appxVectorsEqual(expectedSolution, solution, 0.000001))
+    assertTrue(LinearUtil.appxVectorsEqual(expectedSolution, solution, 0.000001), "Unexpected solution:" + solution)
   }
 
   test("solveSimple4by4WithLowMaxIt(") {

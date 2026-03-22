@@ -2,9 +2,11 @@
 .project
 build/
 bin/
+.metals/
 *.class
 *.log
 .idea
 *.iml
 *.iws
 *.ipr
+.vscode/settings.json

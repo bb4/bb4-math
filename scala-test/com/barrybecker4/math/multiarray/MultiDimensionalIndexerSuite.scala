@@ -2,6 +2,7 @@
 package com.barrybecker4.math.multiarray
 
 import org.scalatest.funsuite.AnyFunSuite
+import scala.compiletime.uninitialized
 
 
 /**
@@ -10,7 +11,7 @@ import org.scalatest.funsuite.AnyFunSuite
 class MultiDimensionalIndexerSuite extends AnyFunSuite {
   
   /** instance under test */
-  private var indexer: MultiDimensionalIndexer = _
+  private var indexer: MultiDimensionalIndexer = uninitialized
 
   /** must be at least one dim */
   test("CreateOLength0DArray(") {

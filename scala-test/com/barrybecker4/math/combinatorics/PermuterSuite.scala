@@ -2,6 +2,7 @@
 package com.barrybecker4.math.combinatorics
 
 import org.scalatest.funsuite.AnyFunSuite
+import scala.compiletime.uninitialized
 
 
 /**
@@ -9,7 +10,7 @@ import org.scalatest.funsuite.AnyFunSuite
   */
 class PermuterSuite extends AnyFunSuite {
   /** instance under test */
-  private var permuter: Permuter = _
+  private var permuter: Permuter = uninitialized
 
   test("Permute0") {
     permuter = new Permuter(0)

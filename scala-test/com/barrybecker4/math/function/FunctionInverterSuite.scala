@@ -3,6 +3,7 @@ package com.barrybecker4.math.function
 
 import com.barrybecker4.math.{MathUtil, Range}
 import org.scalatest.funsuite.AnyFunSuite
+import scala.compiletime.uninitialized
 
 
 /**
@@ -10,7 +11,7 @@ import org.scalatest.funsuite.AnyFunSuite
   */
 class FunctionInverterSuite extends AnyFunSuite {
   /** instance under test. */
-  private var inverter: FunctionInverter = _
+  private var inverter: FunctionInverter = uninitialized
 
   test("InvertTrivialFunction") {
     val func = Array[Double](0, 1.0)

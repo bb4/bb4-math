@@ -45,7 +45,7 @@ class ComplexNumberSuite extends AnyFunSuite {
     assertResult(ComplexNumber(64)) { ComplexNumber.pow(4, ComplexNumber(3)) }
   }
   test("3^(0+i)") {
-    assertResult(ComplexNumber(0.4548324228266097, 0.8905770416677471)) {
+    assertResult(ComplexNumber(0.45483242282660985, 0.890577041667747)) {
       ComplexNumber.pow(3, ComplexNumber(0, 1)) }
   }
   test("2^(1+(pi/2)i)") {

@@ -2,6 +2,7 @@
 package com.barrybecker4.math
 
 import org.scalactic.{Equality, TolerantNumerics}
+import scala.compiletime.uninitialized
 import org.scalatest.funsuite.AnyFunSuite
 
 
@@ -14,7 +15,7 @@ object RangeSuite {
 
 class RangeSuite extends AnyFunSuite {
   /** instance under test */
-  private var range: Range = _
+  private var range: Range = uninitialized
 
   val epsilon = 1e-6f
   implicit val doubleEq: Equality[Double] = TolerantNumerics.tolerantDoubleEquality(RangeSuite.TOL)

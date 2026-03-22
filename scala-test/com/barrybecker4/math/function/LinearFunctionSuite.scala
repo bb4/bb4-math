@@ -2,14 +2,14 @@
 package com.barrybecker4.math.function
 
 import com.barrybecker4.math.Range
-
+import scala.compiletime.uninitialized
 
 /**
   * @author Barry Becker
   */
 class LinearFunctionSuite extends BaseFunctionSuite {
   /** instance under test */
-  private var func: LinearFunction = _
+  private var func: LinearFunction = uninitialized
 
   test("TypicalFunc") {
     func = new LinearFunction(1 / 10.0)

@@ -2,6 +2,7 @@
 package com.barrybecker4.math.multiarray
 
 import org.scalatest.funsuite.AnyFunSuite
+import scala.compiletime.uninitialized
 
 
 /**
@@ -9,7 +10,7 @@ import org.scalatest.funsuite.AnyFunSuite
   */
 class MultiArraySuite extends AnyFunSuite {
   /** instance under test */
-  private var array: MultiArray = _
+  private var array: MultiArray = uninitialized
 
   /** must be at least one dim */
   test("CreateOLength0DArray") {

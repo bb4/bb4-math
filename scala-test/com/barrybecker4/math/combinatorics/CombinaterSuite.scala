@@ -2,6 +2,7 @@
 package com.barrybecker4.math.combinatorics
 
 import org.scalatest.funsuite.AnyFunSuite
+import scala.compiletime.uninitialized
 
 
 /**
@@ -9,7 +10,7 @@ import org.scalatest.funsuite.AnyFunSuite
   */
 class CombinaterSuite extends AnyFunSuite {
   /** instance under test */
-  private var combinater: Combinater = _
+  private var combinater: Combinater = uninitialized
 
   test("Combinations0") {
     combinater = new Combinater(0)

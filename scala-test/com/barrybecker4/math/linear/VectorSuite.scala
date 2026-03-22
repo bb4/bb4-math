@@ -4,6 +4,7 @@ package com.barrybecker4.math.linear
 import com.barrybecker4.math.{MathUtil, linear}
 import org.scalactic.{Equality, TolerantNumerics}
 import org.scalatest.funsuite.AnyFunSuite
+import scala.compiletime.uninitialized
 
 
 /**
@@ -11,7 +12,7 @@ import org.scalatest.funsuite.AnyFunSuite
   */
 class VectorSuite extends AnyFunSuite {
   /** instance under test */
-  private var vector: linear.Vector = _
+  private var vector: linear.Vector = uninitialized
 
   implicit val doubleEq: Equality[Double] = TolerantNumerics.tolerantDoubleEquality(MathUtil.EPS_MEDIUM)
 

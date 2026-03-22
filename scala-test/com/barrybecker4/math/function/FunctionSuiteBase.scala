@@ -3,6 +3,7 @@ package com.barrybecker4.math.function
 
 import org.scalactic.{Equality, TolerantNumerics}
 import org.scalatest.funsuite.AnyFunSuite
+import scala.compiletime.uninitialized
 import org.scalatest.{BeforeAndAfterEach}
 
 /**
@@ -12,7 +13,7 @@ import org.scalatest.{BeforeAndAfterEach}
 abstract class FunctionSuiteBase extends AnyFunSuite with BeforeAndAfterEach {
 
   /** function class under test. */
-  protected var function: InvertibleFunction = _
+  protected var function: InvertibleFunction = uninitialized
   implicit val doubleEq: Equality[Double] =
     TolerantNumerics.tolerantDoubleEquality(0.00000000000001)
 
