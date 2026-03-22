@@ -58,10 +58,10 @@ object ComplexNumber {
   }
 
   /** See http://mathworld.wolfram.com/ComplexArgument.html
-    * @return the complex argument of z
+    * @return the complex argument of z in (-π, π]
     */
   def arg(z: ComplexNumber): Double =
-    Math.atan(z.imaginary / z.real)
+    Math.atan2(z.imaginary, z.real)
 
   /** See https://proofwiki.org/wiki/Sine_of_Complex_Number
     * sin(a+bi) = sina coshb + i cosa sinhb
@@ -84,9 +84,7 @@ object ComplexNumber {
 
 case class ComplexNumber(real: Double, imaginary: Double = 0) {
 
-  def this(c: ComplexNumber) = { this(c.real, c.imaginary) }
-
-  /** @return the magnitude of a complex number. ie.e distance from origin */
+  /** Euclidean distance from the origin. */
   def getMagnitude: Double = Math.sqrt(real * real + imaginary * imaginary)
   def negate: ComplexNumber = ComplexNumber(-real, -imaginary)
 
@@ -106,15 +104,18 @@ case class ComplexNumber(real: Double, imaginary: Double = 0) {
   def divide(other: ComplexNumber): ComplexNumber = ComplexNumber.multiply(this, other.reciprocal)
   def divide(other: Double): ComplexNumber = ComplexNumber(real / other, imaginary / other)
 
-  /** @return this complex number raised to the power n, where n is an integer */
-  def pow(n: Int): ComplexNumber = {
-    var v = this
-    for (_ <- 1 until n)
-      v = v.multiply(this)
-    v
-  }
+  /** @return this complex number raised to the power n, where n is a non-negative integer */
+  def pow(n: Int): ComplexNumber =
+    if (n < 0)
+      throw IllegalArgumentException(s"Negative integer power not supported: $n")
+    else if (n == 0) ComplexNumber(1)
+    else {
+      var v = this
+      for (_ <- 1 until n) v = v.multiply(this)
+      v
+    }
 
-  /** @return the distance from the origin on the complex plane */
+  /** Squared Euclidean norm (real² + imaginary²); used by [[reciprocal]]. */
   def magnitude: Double = real * real + imaginary * imaginary
 
   /** @return the reciprocal - which is 1/c */
@@ -123,15 +124,8 @@ case class ComplexNumber(real: Double, imaginary: Double = 0) {
   def isNaN: Boolean = real.isNaN || imaginary.isNaN
   def isInfinite: Boolean = real.isInfinite || imaginary.isInfinite
 
-  /** @param exponent integer power to raise to
-    * @return raise this complex number to the specified exponent (power).
-    */
-  def power(exponent: Int): ComplexNumber = {
-    var current = this
-    for (i <- 1 until exponent)
-      current = current.multiply(this)
-    current
-  }
+  /** @param exponent integer power to raise to (same semantics as [[pow]]) */
+  def power(exponent: Int): ComplexNumber = pow(exponent)
 
   override def toString: String = {
     if (imaginary == 0) s"$real"

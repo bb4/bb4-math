@@ -10,6 +10,12 @@ import javax.vecmath.Point2d
   * @author Barry Becker
   */
 class MathUtilSuite extends AnyFunSuite {
+  test("log10 matches Math.log10") {
+    assert(MathUtil.log10(100.0) === 2.0)
+    assert(MathUtil.log10(1.0) === 0.0)
+    assert(Math.abs(MathUtil.log10(2.0) - Math.log10(2.0)) < 1e-15)
+  }
+
   test("PositiveGCD") {
     assertResult(21) {MathUtil.gcd(21, 42)}
     assertResult(1) {MathUtil.gcd(21, 4L)}

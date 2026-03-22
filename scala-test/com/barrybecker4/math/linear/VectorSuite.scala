@@ -48,6 +48,11 @@ class VectorSuite extends AnyFunSuite {
     assertResult(5.0) { vector.magnitude }
   }
 
+  test("normalize zero vector yields zero vector") {
+    val z = linear.Vector(IndexedSeq(0.0, 0.0))
+    assertResult(linear.Vector(IndexedSeq(0.0, 0.0))) { z.normalize }
+  }
+
   test("DotProduct") {
     vector = linear.Vector(IndexedSeq[Double](3.0, 4.0))
     val vector2 = linear.Vector(IndexedSeq[Double](5.0, 12.0))

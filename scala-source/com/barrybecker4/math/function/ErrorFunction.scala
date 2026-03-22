@@ -50,7 +50,6 @@ class ErrorFunction() extends InvertibleFunction {
     else -1.0
     if (Math.abs(x) > ErrorFunction.MAX_ERROR_FUNCTION_TABLE_VALUE) {
       val v = 1.0 - (100.0 - Math.abs(x)) * MathUtil.EPS_MEDIUM
-      if (x > 50) System.out.println("erf(" + x + ")=" + v) //NON-NLS
       assert(v > 0.0, " x=" + x + " v=" + v)
       return sign * v
     }

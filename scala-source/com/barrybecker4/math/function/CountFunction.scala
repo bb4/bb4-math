@@ -6,7 +6,6 @@ import com.barrybecker4.math.Range
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
-
 object CountFunction {
   /** When we get more than this many x values, scroll to the right instead of compressing the domain. */
   private val DEFAULT_MAX_X_VALUES: Int = 500
@@ -18,9 +17,8 @@ object CountFunction {
   * @author Barry Becker
   */
 class CountFunction(val initialYValue: Double) extends Function {
-  /** These parallel arrays define the piecewise function map. */
-  protected val xValues: ListBuffer[Double] = new ListBuffer[Double]()
-  protected val yValues: ListBuffer[Double] = new ListBuffer[Double]()
+  protected val xValues: ListBuffer[Double] = ListBuffer.empty
+  protected val yValues: ListBuffer[Double] = ListBuffer.empty
   private var maxXValues: Int = CountFunction.DEFAULT_MAX_X_VALUES
   setInitialValue(initialYValue)
 
@@ -38,49 +36,47 @@ class CountFunction(val initialYValue: Double) extends Function {
     }
     xValues.append(x)
     yValues.append(y)
-    // keep x values in range 0-1
-    val len: Int = xValues.size
-    for (i <- 0 until len)
-      xValues(i) = i.toDouble / (len - 1)
+    renormalizeXToUnitInterval()
   }
 
   def setMaxXValues(max: Int): Unit = {
     maxXValues = max
   }
 
-  /** X axis domain */
   override def getDomain: Range = Range(xValues.head, xValues.last)
 
-  /** @param xValue x value to get y value for.
-    * @return y value
-    */
-  override def getValue(xValue: Double): Double = getValue(xValue, xValues, yValues)
+  override def getValue(xValue: Double): Double =
+    interpolateY(xValue, xValues, yValues)
 
-  /** @param xValue x value
-    * @return an interpolated y values for a specified x
-    */
-  private def getValue(xValue: Double, xVals: mutable.Seq[Double], yVals: mutable.Seq[Double]): Double = {
-    // first find the x value
-    var i: Int = 0
-    while (i < xVals.size && xValue > xVals(i)) {
+  private def renormalizeXToUnitInterval(): Unit = {
+    val len = xValues.size
+    var i = 0
+    while (i < len) {
+      xValues(i) = i.toDouble / (len - 1).max(1)
       i += 1
     }
-    if (i == 0 || xVals.size == 1) return yVals.head
-    val xValm1: Double = xVals(i - 1)
-    val denom: Double = xVals(i) - xValm1
-    if (denom == 0) yVals(i - 1)
+  }
+
+  private def interpolateY(xValue: Double, xVals: mutable.Seq[Double], yVals: mutable.Seq[Double]): Double = {
+    var i = 0
+    while (i < xVals.size && xValue > xVals(i)) i += 1
+    if (i == 0 || xVals.size == 1) yVals.head
     else {
-      val ratio: Double = (xValue - xValm1) / denom
-      val yValm1: Double = yVals(i - 1)
-      yValm1 + ratio * (yVals(i) - yValm1)
+      val xValm1 = xVals(i - 1)
+      val denom = xVals(i) - xValm1
+      if (denom == 0) yVals(i - 1)
+      else {
+        val ratio = (xValue - xValm1) / denom
+        val yValm1 = yVals(i - 1)
+        yValm1 + ratio * (yVals(i) - yValm1)
+      }
     }
   }
 
   override def toString: String = {
-    val bldr: StringBuilder = new StringBuilder("CountFunction: ")
+    val bldr = new StringBuilder("CountFunction: ")
     for (i <- xValues.indices)
       bldr.append("\nx=").append(xValues(i)).append(" y=").append(yValues(i))
     bldr.toString
   }
 }
-

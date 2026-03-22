@@ -5,6 +5,7 @@ import java.math.BigInteger
 
 import javax.vecmath.Point2d
 
+import scala.annotation.tailrec
 import scala.util.Random
 
 
@@ -19,13 +20,10 @@ object MathUtil {
   val EPS_BIG = 0.0001
   val RANDOM = new Random(1)
 
-  /** Used in calculating log base 10. */
-  private val LOG10SCALE = 1.0 / Math.log(10.0)
-
   /** @param v the value to find log base 10 of.
     * @return log base 10 of the specified value.
     */
-  def log10(v: Double): Double = Math.log(v) * LOG10SCALE
+  def log10(v: Double): Double = Math.log10(v)
 
   /** @param v the value to find 10 to the power of
     * @return 10 to the val power.
@@ -33,16 +31,16 @@ object MathUtil {
   def exp10(v: Double): Double = Math.pow(10.0, v)
 
   /** @return the greatest common divisor of 2 longs (may be negative).*/
-  def gcd(a: Long, b: Long): Long = {
-    if (a == 0 && b == 0) return 1L
-    if (a < 0) return gcd(-a, b)
-    if (b < 0) return gcd(a, -b)
-    if (a == 0) return b
-    if (b == 0) return a
-    if (a == b) return a
-    if (b < a) return gcd(b, a)
-    gcd(a, b % a)
-  }
+  @tailrec
+  def gcd(a: Long, b: Long): Long =
+    if (a == 0 && b == 0) 1L
+    else if (a < 0) gcd(-a, b)
+    else if (b < 0) gcd(a, -b)
+    else if (a == 0) b
+    else if (b == 0) a
+    else if (a == b) a
+    else if (b < a) gcd(b, a)
+    else gcd(a, b % a)
 
   /** @param a numberator
     * @param b denominator
@@ -69,16 +67,9 @@ object MathUtil {
     */
   def combination(m: Int, n: Int): BigInteger = {
     val diff = m - n
-    var numerator: BigInteger = null
-    var denominator: BigInteger = null
-    if (n > diff) {
-      numerator = bigPermutation(m, n)
-      denominator = bigFactorial(diff)
-    }
-    else {
-      numerator = bigPermutation(m, diff)
-      denominator = bigFactorial(n)
-    }
+    val (numerator, denominator) =
+      if (n > diff) (bigPermutation(m, n), bigFactorial(diff))
+      else (bigPermutation(m, diff), bigFactorial(n))
     numerator.divide(denominator)
   }
 

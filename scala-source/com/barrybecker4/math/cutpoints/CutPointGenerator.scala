@@ -15,9 +15,9 @@ import com.barrybecker4.math.cutpoints.AbstractCutPointFinder.MIN_RANGE
   */
 class CutPointGenerator(val useTightLabeling: Boolean, val formatter: DecimalFormat) {
 
-  setUseTightLabeling(useTightLabeling)
   /** If true, show the precise min/max values at the extreme cut points (tight), else loose labels */
-  private var cutPointFinder: AbstractCutPointFinder = _
+  private var cutPointFinder: AbstractCutPointFinder =
+    if (useTightLabeling) new TightCutPointFinder else new LooseCutPointFinder
 
   def this() = {
     this(true, new DecimalFormat("###,###.##"))
@@ -41,15 +41,16 @@ class CutPointGenerator(val useTightLabeling: Boolean, val formatter: DecimalFor
     */
   def getCutPointLabels(range: Range, maxTicks: Int): Array[String] = {
     val cutPoints = cutPointFinder.getCutPoints(range, maxTicks)
-    var maxFracDigits = getNumberOfFractionDigits(range, maxTicks)
     val useTight = cutPointFinder.isInstanceOf[TightCutPointFinder]
     val length = cutPoints.length
     val labels = Array.ofDim[String](length)
 
+    val baseFracDigits = getNumberOfFractionDigits(range, maxTicks)
     for (i <- 0 until length) {
-      // show a little more precision for the tight labels.
-      maxFracDigits += (if (useTight && (i == 0 || i == length - 1)) 1 else 0)
-      formatter.setMaximumFractionDigits(maxFracDigits)
+      // show a little more precision for the tight labels at the ends only
+      val fracDigits =
+        baseFracDigits + (if (useTight && (i == 0 || i == length - 1)) 1 else 0)
+      formatter.setMaximumFractionDigits(fracDigits)
       labels(i) = formatter.format(cutPoints(i))
     }
     labels

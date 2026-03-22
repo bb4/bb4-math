@@ -65,10 +65,11 @@ case class Vector(data: IndexedSeq[Double]) {
   /** @return magnitude of the vector. */
   def magnitude: Double = Math.sqrt(data.map(x => x * x).sum)
 
-  /** @return a vector in the same direction as vec, but with unit magnitude. */
+  /** @return a vector in the same direction as this, but with unit magnitude (or zero if [[magnitude]] is 0). */
   def normalize: Vector = {
     val mag = this.magnitude
-    Vector(data.map(_ / mag))
+    if (mag == 0) Vector(data.map(_ => 0.0))
+    else Vector(data.map(_ / mag))
   }
 
   def size: Int = data.length

@@ -136,4 +136,16 @@ class ComplexNumberSuite extends AnyFunSuite {
       ComplexNumber.sin(v)
     }
   }
+
+  test("arg uses atan2 for second quadrant") {
+    assert(ComplexNumber.arg(ComplexNumber(-1.0, 1.0)) === 3.0 * Math.PI / 4.0)
+  }
+
+  test("arg for negative real, negative imaginary") {
+    assert(ComplexNumber.arg(ComplexNumber(-1.0, -1.0)) === -3.0 * Math.PI / 4.0)
+  }
+
+  test("pow(0) is one") {
+    assertResult(ComplexNumber(1)) { ComplexNumber(3, 4).pow(0) }
+  }
 }
