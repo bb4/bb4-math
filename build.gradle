@@ -1,7 +1,7 @@
 plugins {
-    id 'com.barrybecker4.bb4.scala-library' version '2.0-SNAPSHOT'
-    id 'com.barrybecker4.bb4.publish' version '2.0-SNAPSHOT'
-    id 'com.barrybecker4.bb4.application' version '2.0-SNAPSHOT'
+    id 'com.barrybecker4.bb4.scala-library' version '2.0.0'
+    id 'com.barrybecker4.bb4.publish' version '2.0.0'
+    id 'com.barrybecker4.bb4.application' version '2.0.0'
 }
 
 description = 'Library of common mathematical methods'
@@ -10,5 +10,5 @@ version = '2.0-SNAPSHOT'
 
 bb4 {
     archivesBaseName.set('bb4-math')
-    mainClass.set('com.barrybecker4.math.combinatorics.Combinator')
+    mainClass.set('com.barrybecker4.math.combinatorics.Combinater')
 }

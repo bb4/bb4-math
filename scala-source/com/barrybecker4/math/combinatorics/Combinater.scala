@@ -45,3 +45,14 @@ class Combinater(num: Int) extends Iterator[List[Int]] {
     subset.toList
   }
 }
+
+object Combinater {
+
+  /** Demo: print all non-empty subsets for N elements (default N = 3). */
+  def main(args: Array[String]): Unit = {
+    val n = if (args.nonEmpty) args(0).toInt else 3
+    val combinater = new Combinater(n)
+    println(s"All $n-element combinations (${combinater.numCombinations}):")
+    combinater.foreach(c => println(c.mkString("[", ", ", "]")))
+  }
+}
