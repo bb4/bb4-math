@@ -5,9 +5,21 @@ import org.scalatest.funsuite.AnyFunSuite
 
 
 /**
-  * @author Barry Becker
-  */
+ * @author Barry Becker
+ */
 class ComplexNumberSuite extends AnyFunSuite {
+
+  /** Math.pow/log/cos/sin/exp are permitted by the JLS to differ in the last bit
+   * across platforms/JVMs (only StrictMath guarantees bit-identical results),
+   * so transcendental pow() results need a tolerance, not exact equality. */
+  private val EPS = 1e-9
+
+  private def assertApproxEquals(expected: ComplexNumber, actual: ComplexNumber, eps: Double = EPS): Unit = {
+    assert(Math.abs(expected.real - actual.real) < eps,
+      s"real part: expected ${expected.real}, got ${actual.real}")
+    assert(Math.abs(expected.imaginary - actual.imaginary) < eps,
+      s"imaginary part: expected ${expected.imaginary}, got ${actual.imaginary}")
+  }
 
   test("construction") {
     assertResult("1.0 + 1.0i") {ComplexNumber(1, 1).toString}
@@ -38,19 +50,19 @@ class ComplexNumberSuite extends AnyFunSuite {
   }
 
   test("5^(3+2i)") {
-    assertResult(ComplexNumber(-124.62689272475588, -9.650782857996035)) {
-      ComplexNumber.pow(5, ComplexNumber(3, 2)) }
+    assertApproxEquals(ComplexNumber(-124.62689272475588, -9.650782857996035),
+      ComplexNumber.pow(5, ComplexNumber(3, 2)))
   }
   test("4^(3+0i)") {
     assertResult(ComplexNumber(64)) { ComplexNumber.pow(4, ComplexNumber(3)) }
   }
   test("3^(0+i)") {
-    assertResult(ComplexNumber(0.45483242282660985, 0.890577041667747)) {
-      ComplexNumber.pow(3, ComplexNumber(0, 1)) }
+    assertApproxEquals(ComplexNumber(0.45483242282660985, 0.890577041667747),
+      ComplexNumber.pow(3, ComplexNumber(0, 1)))
   }
   test("2^(1+(pi/2)i)") {
-    assertResult(ComplexNumber(0.9271102968159963, 1.7721361396737427)) {
-      ComplexNumber.pow(2, ComplexNumber(1, Math.PI / 2.0)) }
+    assertApproxEquals(ComplexNumber(0.9271102968159963, 1.7721361396737427),
+      ComplexNumber.pow(2, ComplexNumber(1, Math.PI / 2.0)))
   }
   test("1^(0+(pi)i)") {
     assertResult(ComplexNumber(1)) { ComplexNumber.pow(1, ComplexNumber(0, Math.PI)) }
