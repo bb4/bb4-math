@@ -52,13 +52,8 @@ object MathUtil {
     * @param values values to find least common multiple of
     * @return the least common multiple of values[0], values[1],... values[i].
     */
-  def lcm(values: Array[Int]): Long = {
-    var result: Long = 1
-    for (v <- values) {
-      result = lcm(result, v)
-    }
-    result
-  }
+  def lcm(values: Array[Int]): Long =
+    values.foldLeft(1L)((acc, v) => lcm(acc, v))
 
   /** Implementation of c(m,n)
     * @param m total number of items
