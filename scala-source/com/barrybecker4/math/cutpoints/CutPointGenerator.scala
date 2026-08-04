@@ -62,8 +62,7 @@ class CutPointGenerator(val useTightLabeling: Boolean, val formatter: DecimalFor
     * @return Recommended number of fractional digits to display. The cut points: eg. 0, 1, 2, etc.
     */
   private[cutpoints] def getNumberOfFractionDigits(range: Range, maxNumTicks: Int) = {
-    var max1 = range.max
-    if (range.getExtent <= MIN_RANGE) max1 = range.min + MIN_RANGE
+    val max1 = if (range.getExtent <= MIN_RANGE) range.min + MIN_RANGE else range.max
     val extent = Rounder.roundUp(max1 - range.min)
     val d = Rounder.roundDown(extent / (maxNumTicks - 1))
     Math.max(-Math.floor(MathUtil.log10(d)), 0).toInt
