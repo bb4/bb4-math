@@ -32,9 +32,8 @@ case class Vector(data: IndexedSeq[Double]) {
     val magThis = this.magnitude
     //println("for v1=" + this + "v2=" + b + " magThis=" + magThis + " magB=" + magB)
 
-    var divisor = magThis * magB
-    divisor = if (divisor == 0) 1.0
-    else divisor
+    val product = magThis * magB
+    val divisor = if (product == 0) 1.0 else product
     val dot = this.dot(b)
     val normalizedDotProduct = dot / divisor
     assert(normalizedDotProduct >= (-1.0 - MathUtil.EPS_MEDIUM) && normalizedDotProduct <= (1 + MathUtil.EPS_MEDIUM),
