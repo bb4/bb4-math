@@ -1,43 +1,29 @@
 /* Copyright by Barry G. Becker, 2000-2018. Licensed under MIT License: http://www.opensource.org/licenses/MIT */
 package com.barrybecker4.math.interpolation
 
-object InterpolationMethod {
-  val VALUES = Array(STEP, LINEAR, CUBIC, COSINE, HERMITE)
-}
-
 /**
-  * Supported interpolators
+  * Supported interpolators.
   * @author Barry Becker
   */
-abstract class InterpolationMethod {
+enum InterpolationMethod:
+
+  case STEP, LINEAR, CUBIC, COSINE, HERMITE
 
   /**
-    * Factory method for creating the search strategy to use.
-    * Do not call the constructor directly.
-    * @return the search method to use
+    * Factory method for creating the interpolator to use.
+    * Do not call the interpolator constructors directly when selecting by method.
+    * @return the interpolator for this method
     */
-  def createInterpolator(function: Array[Double]): Interpolator
-}
+  def createInterpolator(function: Array[Double]): Interpolator = this match
+    case STEP => new StepInterpolator(function)
+    case LINEAR => new LinearInterpolator(function)
+    case CUBIC => new CubicInterpolator(function)
+    case COSINE => new CosineInterpolator(function)
+    case HERMITE => new HermiteInterpolator(function)
 
+object InterpolationMethod:
+  /** All methods in stable display order (used by UI combo boxes). */
+  val VALUES: Array[InterpolationMethod] = InterpolationMethod.values
 
-// val STEP, LINEAR, CUBIC, COSINE, HERMITE = Value
-case object STEP extends InterpolationMethod() {
-  override def createInterpolator(function: Array[Double]) = new StepInterpolator(function)
-}
-
-case object LINEAR extends InterpolationMethod() {
-  override def createInterpolator(function: Array[Double]) = new LinearInterpolator(function)
-}
-
-case object CUBIC extends InterpolationMethod() {
-  override def createInterpolator(function: Array[Double]) = new CubicInterpolator(function)
-}
-
-case object COSINE extends InterpolationMethod() {
-  override def createInterpolator(function: Array[Double]) = new CosineInterpolator(function)
-}
-
-case object HERMITE extends InterpolationMethod() {
-  override def createInterpolator(function: Array[Double]) = new HermiteInterpolator(function)
-}
-
+/** Package-level aliases so existing `import ...interpolation.LINEAR` keeps working. */
+export InterpolationMethod.{STEP, LINEAR, CUBIC, COSINE, HERMITE}
