@@ -21,12 +21,10 @@ class TightCutPointFinder extends AbstractCutPointFinder {
   override protected def addPoints(positions: ArrayBuffer[Double],
                                    roundedRange: Range, finalRange: Range, d: Double): Unit = {
     positions.append(checkSmallNumber(finalRange.min))
-    var initialInc = d
-    var pct = (roundedRange.min + d - finalRange.min) / d
-    if (pct < MIN_LABEL_SEPARATION_PCT) initialInc = 2 * d
-    var finalInc = 0.5 * d
-    pct = (finalRange.max - (roundedRange.max - d)) / d
-    if (pct < MIN_LABEL_SEPARATION_PCT) finalInc = 1.5 * d
+    val pctStart = (roundedRange.min + d - finalRange.min) / d
+    val initialInc = if (pctStart < MIN_LABEL_SEPARATION_PCT) 2 * d else d
+    val pctEnd = (finalRange.max - (roundedRange.max - d)) / d
+    val finalInc = if (pctEnd < MIN_LABEL_SEPARATION_PCT) 1.5 * d else 0.5 * d
     val stop = roundedRange.max - finalInc
 
     for (x <- scala.collection.immutable.Range.BigDecimal(roundedRange.min + initialInc, stop, d))

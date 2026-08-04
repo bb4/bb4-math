@@ -25,14 +25,14 @@ abstract class AbstractCutPointFinder {
     */
   def getCutPoints(range: Range, maxNumTicks: Int): Array[Double] = {
     validateArguments(range)
-    var finalRange: Range = new Range(range)
-    if (range.getExtent <= AbstractCutPointFinder.MIN_RANGE)
-      finalRange = finalRange.add(range.min + AbstractCutPointFinder.MIN_RANGE)
-    var positions: ArrayBuffer[Double] = new ArrayBuffer[Double]()
+    val finalRange =
+      if (range.getExtent <= AbstractCutPointFinder.MIN_RANGE)
+        new Range(range).add(range.min + AbstractCutPointFinder.MIN_RANGE)
+      else new Range(range)
+    val positions = new ArrayBuffer[Double]()
     if (finalRange.getExtent < AbstractCutPointFinder.MIN_RANGE)
-      positions :+= finalRange.min
+      positions += finalRange.min
     else determineCutPoints(maxNumTicks, finalRange, positions)
-    //val result: Array[Double] = new Array[Double](positions.size)
     positions.toArray
   }
 
