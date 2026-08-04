@@ -109,11 +109,7 @@ case class ComplexNumber(real: Double, imaginary: Double = 0) {
     if (n < 0)
       throw IllegalArgumentException(s"Negative integer power not supported: $n")
     else if (n == 0) ComplexNumber(1)
-    else {
-      var v = this
-      for (_ <- 1 until n) v = v.multiply(this)
-      v
-    }
+    else (1 until n).foldLeft(this)((v, _) => v.multiply(this))
 
   /** Squared Euclidean norm (real² + imaginary²); used by [[reciprocal]]. */
   def magnitude: Double = real * real + imaginary * imaginary
