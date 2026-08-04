@@ -43,13 +43,13 @@ class FunctionInverter(var functionMap: Array[Double]) {
       if (j > 0) {
         val fm1 = functionMap(j - 1)
         assert(xVal >= fm1)
-        var denom = functionMap(j) - fm1
         val numerator = xVal - fm1
-        assert(denom >= 0)
-        if (denom == 0) {
+        val denomRaw = functionMap(j) - fm1
+        assert(denomRaw >= 0)
+        val denom = if (denomRaw == 0) {
           assert(numerator == 0)
-          denom = 1.0
-        }
+          1.0
+        } else denomRaw
         val y = ((j - 1).toDouble + numerator / denom) / lengthm1.toDouble
         invFunc(i) = xRange.min + y * xRange.getExtent
         assert(invFunc(i) < xMax + FunctionInverter.EPS_BIG, s"${invFunc(i)} was not less than $xMax")
