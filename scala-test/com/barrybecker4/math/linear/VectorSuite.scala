@@ -39,13 +39,14 @@ class VectorSuite extends AnyFunSuite {
   test("DistanceTo(") {
     vector = linear.Vector(IndexedSeq[Double](1.0, 2.0))
     val vector2 = linear.Vector(IndexedSeq[Double](3.0, 4.0))
-    assertResult(0.0) { vector.distanceTo(vector) }
-    assertResult(2.8284271247461903) { vector.distanceTo(vector2) }
+    assert(0.0 === vector.distanceTo(vector))
+    // sqrt(8); Math.sqrt may differ in the last bit across JVMs
+    assert(2.8284271247461903 === vector.distanceTo(vector2))
   }
 
   test("Magnitude") {
     vector = linear.Vector(IndexedSeq[Double](3.0, 4.0))
-    assertResult(5.0) { vector.magnitude }
+    assert(5.0 === vector.magnitude)
   }
 
   test("normalize zero vector yields zero vector") {
@@ -62,19 +63,19 @@ class VectorSuite extends AnyFunSuite {
   test("NormalizedDotProduct(") {
     vector = linear.Vector(IndexedSeq[Double](3.0, 4.0))
     val vector2 = linear.Vector(IndexedSeq[Double](5.0, 12.0))
-    assertResult(0.9692307692307692) { vector.normalizedDot(vector2) }
+    assert(0.9692307692307692 === vector.normalizedDot(vector2))
   }
 
   test("NormalizedDotProductWhenParallel") {
     vector = linear.Vector(IndexedSeq[Double](3.0, 4.0))
     val vector2 = linear.Vector(IndexedSeq[Double](3.0, 4.0))
-    assertResult(1.0) { vector.normalizedDot(vector2) }
+    assert(1.0 === vector.normalizedDot(vector2))
   }
 
   test("NormalizedDotProductWhenSmall") {
     vector = linear.Vector(IndexedSeq[Double](0.0000003, 0.0000004))
     val vector2 = linear.Vector(IndexedSeq[Double](0.0000005, 0.0000012))
-    assertResult(0.9692307692307692) { vector.normalizedDot(vector2) }
+    assert(0.9692307692307692 === vector.normalizedDot(vector2))
   }
 
   /** This case failed from hill climbing one time */

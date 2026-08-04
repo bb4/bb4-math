@@ -1,6 +1,7 @@
 /* Copyright by Barry G. Becker, 2000-2018. Licensed under MIT License: http://www.opensource.org/licenses/MIT */
 package com.barrybecker4.math
 
+import org.scalactic.{Equality, TolerantNumerics}
 import org.scalatest.funsuite.AnyFunSuite
 
 import javax.vecmath.Point2d
@@ -10,10 +11,14 @@ import javax.vecmath.Point2d
   * @author Barry Becker
   */
 class MathUtilSuite extends AnyFunSuite {
+
+  /** atan2/log10 may differ in the last bit across JVMs; only StrictMath is bit-identical. */
+  implicit val doubleEq: Equality[Double] = TolerantNumerics.tolerantDoubleEquality(MathUtil.EPS_MEDIUM)
+
   test("log10 matches Math.log10") {
-    assert(MathUtil.log10(100.0) === 2.0)
-    assert(MathUtil.log10(1.0) === 0.0)
-    assert(Math.abs(MathUtil.log10(2.0) - Math.log10(2.0)) < 1e-15)
+    assert(2.0 === MathUtil.log10(100.0))
+    assert(0.0 === MathUtil.log10(1.0))
+    assert(Math.log10(2.0) === MathUtil.log10(2.0))
   }
 
   test("PositiveGCD") {
@@ -101,17 +106,9 @@ class MathUtilSuite extends AnyFunSuite {
 
   test("FindAngle") {
     val point = new Point2d(1.0, 1.0)
-    var x: Double = 0
-    while (x < 2.0 * Math.PI) {
-      val toPoint = new Point2d(point.x + Math.cos(x), point.y + Math.sin(x))
-      //System.out.println("angle to " + toPoint + " is " + MathUtil.getDirectionTo(point, toPoint))
-      x += 0.3
-    }
-    assertResult(Math.PI / 4.0) { MathUtil.getDirectionTo(point, new Point2d(2.0, 2.0))}
-    assertResult(3.0 * Math.PI / 4.0) { MathUtil.getDirectionTo(point, new Point2d(0.0, 2.0)) }
-    assertResult(5.0 * Math.PI / 4.0 - 2.0 * Math.PI) {
-      MathUtil.getDirectionTo(point, new Point2d(0.0, 0.0))
-    }
-    assertResult(-Math.PI / 4.0) { MathUtil.getDirectionTo(point, new Point2d(2.0, 0.0)) }
+    assert(Math.PI / 4.0 === MathUtil.getDirectionTo(point, new Point2d(2.0, 2.0)))
+    assert(3.0 * Math.PI / 4.0 === MathUtil.getDirectionTo(point, new Point2d(0.0, 2.0)))
+    assert(5.0 * Math.PI / 4.0 - 2.0 * Math.PI === MathUtil.getDirectionTo(point, new Point2d(0.0, 0.0)))
+    assert(-Math.PI / 4.0 === MathUtil.getDirectionTo(point, new Point2d(2.0, 0.0)))
   }
 }
