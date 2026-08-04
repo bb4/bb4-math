@@ -16,8 +16,7 @@ class CosineInterpolator(function: Array[Double]) extends AbstractSmoothInterpol
     val len = function.length - 1
     val x = value * len.toDouble
     val index0 = x.toInt
-    var index1 = index0 + 1
-    if (len == 0) index1 = len
+    val index1 = if (len == 0) len else index0 + 1
     val xdiff = x - index0
 
     if (index1 > len) function(len)

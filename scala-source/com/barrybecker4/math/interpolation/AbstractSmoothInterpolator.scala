@@ -16,12 +16,11 @@ abstract class AbstractSmoothInterpolator private[interpolation](function: Array
     val xdiff = x - index0
     // Produce the 4 points to use for interpolation
     val y1 = function(index0)
-    var y0 = y1
-    var y2 = y1
-    if (len > 0) y2 = if (index1 > len) function(len) else function(index1)
-    var y3 = y2
-    if (index0 > 0) y0 = function(index0 - 1)
-    if (index1 < len) y3 = function(index1 + 1)
+    val y2 =
+      if (len > 0) if (index1 > len) function(len) else function(index1)
+      else y1
+    val y0 = if (index0 > 0) function(index0 - 1) else y1
+    val y3 = if (index1 < len) function(index1 + 1) else y2
     //System.out.println("y0=" + y0 + " y1=" + y1 + " y2=" + y2 + " y3=" + y3 + "  xdiff=" + xdiff);
     smoothInterpolate(y0, y1, y2, y3, xdiff)
   }
