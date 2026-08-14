@@ -1,18 +1,34 @@
 # bb4-math
 
-This library project math oriented code for bb4 projects.
+[![CI](https://github.com/bb4/bb4-math/actions/workflows/ci.yml/badge.svg)](https://github.com/bb4/bb4-math/actions/workflows/ci.yml)
 
-To use, include this dependency in your gradle file
+Core math utilities used across bb4 projects: ranges and axis cut-points, interpolation, 1D functions, combinatorics, complex numbers, linear algebra helpers, and multi-dimensional arrays.
 
-`compile 'com.barrybecker4:bb4-math:<version>`
+## Using it
 
-### [How to Build](https://github.com/barrybecker4/bb4-common/wiki/Building-bb4-Projects)
-If you have not already done so, first install [Git](http://git-scm.com/) and [Intellij](http://www.jetbrains.com/idea/).
-You also need to have [java SDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html) installed and set the JAVA_HOME environment variable to point to the location where it is installed.
+```groovy
+implementation 'com.barrybecker4:bb4-math:2.0.0'
+```
 
-Type 'gradlew build' at the root (prepend with ./ if running on Cygwin or Linux). This will build everything, but since it is a library project there won't be much to see. 
+See the [releases page](https://github.com/bb4/bb4-math/releases) or [Maven Central](https://central.sonatype.com/artifact/com.barrybecker4/bb4-math) for newer versions.
 
-When there is a new release, versioned artifacts will be published by Barry Becker to [Sonatype](https://oss.sonatype.org).
+## What's inside
 
-### License
-All source (unless otherwise specified in individual file) is provided under the [MIT License](http://www.opensource.org/licenses/MIT)
+- **`MathUtil`** — GCD/LCM, factorial, combinations/permutations, log10/exp10, and shared epsilon constants
+- **`Range`** — double-precision min/max range with extent, containment, and unit-scale mapping
+- **`cutpoints`** — nicely rounded tick/label positions for a numeric range (`CutPointGenerator`, tight vs. loose labeling)
+- **`interpolation`** — interpolate through an array of y-values (linear, cosine, cubic, Hermite, step)
+- **`function`** — 1D function types (`LinearFunction`, `LogFunction`, `ArrayFunction`, `PiecewiseFunction`, Gaussian `ErrorFunction`, wave forms, invertibility helpers)
+- **`combinatorics`** — memory-efficient iterators over combinations (`Combinater`) and permutations (`Permuter`)
+- **`complex`** — complex numbers and ranges with arithmetic and exponentiation
+- **`linear`** — N-dimensional `Vector`, linear utilities, and a conjugate-gradient solver for `Ax = b`
+- **`multiarray`** — arbitrarily dimensioned arrays of doubles with multi-index ↔ flat-index mapping
+- **`random`** — skewed Gaussian random numbers (`SkewedRandom`)
+
+## Building from source
+
+See the [Building bb4 Projects wiki](https://github.com/bb4/bb4-common/wiki/Building-bb4-Projects).
+
+## License
+
+MIT — see [LICENSE](LICENSE).
