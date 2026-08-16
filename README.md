@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/bb4/bb4-math/actions/workflows/ci.yml/badge.svg)](https://github.com/bb4/bb4-math/actions/workflows/ci.yml)
 
-📊 [Build status for all bb4 projects](https://github.com/bb4)
+📊 [Build status for all bb4 projects](https://github.com/bb4/.github)
 
 Core math utilities used across bb4 projects: ranges and axis cut-points, interpolation, 1D functions, combinatorics, complex numbers, linear algebra helpers, and multi-dimensional arrays.
 
