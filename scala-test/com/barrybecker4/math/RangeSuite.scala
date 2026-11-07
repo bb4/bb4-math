@@ -6,9 +6,7 @@ import scala.compiletime.uninitialized
 import org.scalatest.funsuite.AnyFunSuite
 
 
-/**
-  * @author Barry Becker
-  */
+
 object RangeSuite {
   val TOL = 0.000000000001
 }

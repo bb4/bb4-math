@@ -6,7 +6,6 @@ import com.barrybecker4.math.MathUtil
 /**
   * Rounds numbers in a "nice" way so that they are easy to read.
   * From an article by Paul Heckbert in Graphics Gems 1.
-  * @author Barry Becker
   */
 object Rounder {
 

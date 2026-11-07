@@ -15,7 +15,6 @@ import scala.collection.mutable.ArrayBuffer
   * This algorithm will only work as long as the number of subsets is less than Long.MAX_VALUE.
   * In other words, N must be less than 60 since pow(2, 60) is close to Long.MAX_VALUE.
   * @param num the number of integer elements to permute.
-  * @author Barry Becker
   */
 class Combinater(num: Int) extends Iterator[List[Int]] {
 

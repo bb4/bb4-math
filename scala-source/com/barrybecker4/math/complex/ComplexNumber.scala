@@ -4,7 +4,6 @@ package com.barrybecker4.math.complex
 /**
   * A Complex number is comprised of real and imaginary parts of the form a + bi.
  *
-  * @author Barry Becker
   */
 object ComplexNumber {
   val i: ComplexNumber = ComplexNumber(0, 1.0)

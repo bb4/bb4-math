@@ -3,7 +3,6 @@ package com.barrybecker4.math.function
 
 /**
   * Different sorts of wave forms.
-  * @author Barry Becker
   */
 enum WaveType(name: String):
 

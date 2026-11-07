@@ -9,9 +9,7 @@ import org.scalactic.{Equality, TolerantNumerics}
 import org.scalatest.funsuite.AnyFunSuite
 
 
-/**
-  * @author Barry Becker
-  */
+
 object RounderSuite {
   private val EPS = 0.00001
 }

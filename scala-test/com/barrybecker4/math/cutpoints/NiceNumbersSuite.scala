@@ -5,9 +5,7 @@ import com.barrybecker4.math.Range
 import com.barrybecker4.math.cutpoints.NiceNumbersSuite._
 import org.scalatest.funsuite.AnyFunSuite
 
-/**
-  * @author Barry Becker
-  */
+
 object NiceNumbersSuite {
   private val EXPECTED_LOOSE_CUTS = Array("0", "20", "40", "60", "80", "100", "120")
   private val EXPECTED_TIGHT_CUTS = Array("11", "20", "40", "60", "80", "101")

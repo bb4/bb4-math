@@ -14,7 +14,6 @@ object LogFunction {
   * @param scale        amount to scale after taking the logarithm.
   * @param positiveOnly If true then log of a non-positive number is NaN and -log(x) when x between 0 and 1.
   *                     If false, then return log(-x)
-  * @author Barry Becker
   */
 class LogFunction(val scale: Double,
                   val base: Double = LogFunction.DEFAULT_BASE,

@@ -19,9 +19,7 @@ object NiceNumberRounderSuite {
     1000.0, 1000.0, 1000.0, 2000.0, 2000.0, 2000.0, 2000.0)
 }
 
-/**
-  * @author Barry Becker
-  */
+
 class NiceNumberRounderSuite extends AnyFunSuite {
 
   /** Rounder uses Math.log10/pow; results may differ in the last bit across JVMs. */

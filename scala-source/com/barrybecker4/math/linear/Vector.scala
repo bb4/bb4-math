@@ -5,7 +5,6 @@ import com.barrybecker4.math.MathUtil
 /**
   * Represents an immutable N dimensional vector.
  *
-  * @author Barry Becker
   */
 case class Vector(data: IndexedSeq[Double]) {
   assert(data.nonEmpty)

@@ -5,9 +5,7 @@ import org.scalatest.funsuite.AnyFunSuite
 import scala.compiletime.uninitialized
 
 
-/**
-  * @author Barry Becker
-  */
+
 class MultiArraySuite extends AnyFunSuite {
   /** instance under test */
   private var array: MultiArray = uninitialized

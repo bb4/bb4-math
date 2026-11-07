@@ -1,9 +1,7 @@
 /* Copyright by Barry G. Becker, 2000-2018. Licensed under MIT License: http://www.opensource.org/licenses/MIT */
 package com.barrybecker4.math.interpolation
 
-/**
-  * @author Barry Becker
-  */
+
 class CubicInterpolator(function: Array[Double]) extends AbstractSmoothInterpolator(function) {
 
   override protected def smoothInterpolate(y0: Double, y1: Double, y2: Double, y3: Double, mu: Double): Double = {

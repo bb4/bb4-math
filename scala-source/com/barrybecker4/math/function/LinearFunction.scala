@@ -12,7 +12,6 @@ object LinearFunction {
   * The function defines a line. It scales and offsets values.
   * @param scale amount to multiply/scale the value by
   * @param offset amount to add after scaling.
-  * @author Barry Becker
   */
 class LinearFunction(scale: Double, offset: Double = 0) extends InvertibleFunction {
 

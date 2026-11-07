@@ -11,7 +11,6 @@ import com.barrybecker4.math.Range
   *
   * @param xValues x function values
   * @param yValues y function values
-  * @author Barry Becker
   */
 class PiecewiseFunction(val xValues: Array[Double], val yValues: Array[Double]) extends InvertibleFunction {
   assert(this.xValues.length == this.yValues.length)

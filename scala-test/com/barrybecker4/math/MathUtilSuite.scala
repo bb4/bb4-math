@@ -7,9 +7,7 @@ import org.scalatest.funsuite.AnyFunSuite
 import javax.vecmath.Point2d
 
 
-/**
-  * @author Barry Becker
-  */
+
 class MathUtilSuite extends AnyFunSuite {
 
   /** atan2/log10 may differ in the last bit across JVMs; only StrictMath is bit-identical. */

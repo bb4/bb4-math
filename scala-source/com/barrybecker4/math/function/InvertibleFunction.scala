@@ -3,7 +3,6 @@ package com.barrybecker4.math.function
 
 /**
   * Defines interface for generic 1-1 function f(x).
-  * @author Barry Becker
   */
 trait InvertibleFunction extends Function {
 

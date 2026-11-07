@@ -11,7 +11,6 @@ import scala.collection.mutable.ArrayBuffer
   * The implementation does not require memory for storing the permutations since
   * only one is produced at a time.
   * @param num the number of integer elements to permute.
-  * @author Barry Becker
   */
 class Permuter(val num: Int) extends Iterator[List[Int]] {
   val numPermutations: Long = MathUtil.factorial(num)

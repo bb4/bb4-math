@@ -4,9 +4,7 @@ package com.barrybecker4.math.function
 import com.barrybecker4.math.Range
 import scala.compiletime.uninitialized
 
-/**
-  * @author Barry Becker
-  */
+
 class HeightFunctionSuite extends BaseFunctionSuite {
 
   /** instance under test */

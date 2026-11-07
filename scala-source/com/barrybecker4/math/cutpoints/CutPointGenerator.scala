@@ -11,7 +11,6 @@ import com.barrybecker4.math.cutpoints.AbstractCutPointFinder.MIN_RANGE
   * From an article by Paul Heckbert in Graphics Gems 1.
   * @param useTightLabeling whether or not to use tight labeling.
   * @param formatter method for formatting the label values.
-  * @author Barry Becker
   */
 class CutPointGenerator(val useTightLabeling: Boolean, val formatter: DecimalFormat) {
 

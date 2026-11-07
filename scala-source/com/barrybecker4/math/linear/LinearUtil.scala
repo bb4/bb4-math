@@ -6,7 +6,6 @@ import javax.vecmath.{GMatrix, GVector, Vector2d}
   * This class implements a number of static utility functions that are useful for linear algebra/
   * Among other things there is a  conjugate gradient matrix solver.
  *
-  * @author Barry Becker
   */
 object LinearUtil {
 

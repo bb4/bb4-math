@@ -7,7 +7,6 @@ import org.scalatest.funsuite.AnyFunSuite
 
 /**
   * Characterization tests for [[WaveType]] (including package-level case names used by consumers).
-  * @author Barry Becker
   */
 class WaveTypeSuite extends AnyFunSuite {
 

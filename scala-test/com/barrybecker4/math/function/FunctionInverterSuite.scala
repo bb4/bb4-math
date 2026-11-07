@@ -6,9 +6,7 @@ import org.scalatest.funsuite.AnyFunSuite
 import scala.compiletime.uninitialized
 
 
-/**
-  * @author Barry Becker
-  */
+
 class FunctionInverterSuite extends AnyFunSuite {
   /** instance under test. */
   private var inverter: FunctionInverter = uninitialized

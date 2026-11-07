@@ -6,7 +6,6 @@ import org.scalatest.funsuite.AnyFunSuite
 
 /**
   * Characterization tests for [[InterpolationMethod]] factory cases and package-level aliases.
-  * @author Barry Becker
   */
 class InterpolationMethodSuite extends AnyFunSuite {
 

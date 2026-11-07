@@ -8,7 +8,6 @@ import scala.collection.mutable.ArrayBuffer
 
 /**
   * Base class for cut point finders.
-  * @author Barry Becker
   */
 object AbstractCutPointFinder {
   /** The range should not get smaller than this. */

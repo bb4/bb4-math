@@ -1,9 +1,7 @@
 /* Copyright by Barry G. Becker, 2000-2018. Licensed under MIT License: http://www.opensource.org/licenses/MIT */
 package com.barrybecker4.math.interpolation
 
-/**
-  * @author Barry Becker
-  */
+
 class HermiteInterpolator(function: Array[Double], var tension: Double, var bias: Double)
   extends AbstractSmoothInterpolator(function) {
 

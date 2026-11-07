@@ -5,9 +5,7 @@ import com.barrybecker4.math.Range
 import org.scalatest.funsuite.AnyFunSuite
 
 
-/**
-  * @author Barry Becker
-  */
+
 class LooseCutPointFinderSuite extends AnyFunSuite {
 
   private val finder = new LooseCutPointFinder

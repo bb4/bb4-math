@@ -6,7 +6,6 @@ import com.barrybecker4.math.interpolation.LinearInterpolator
 
 /**
   * Gaussian error function
-  * @author Barry Becker
   */
 object ErrorFunction {
 

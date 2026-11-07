@@ -3,7 +3,6 @@ package com.barrybecker4.math.interpolation
 
 /**
   * Supported interpolators.
-  * @author Barry Becker
   */
 enum InterpolationMethod:
 

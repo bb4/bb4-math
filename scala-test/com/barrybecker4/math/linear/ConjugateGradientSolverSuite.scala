@@ -7,9 +7,7 @@ import ConjugateGradientSolverSuite.MATRIX_4x4
 import org.scalatest.funsuite.AnyFunSuite
 import scala.compiletime.uninitialized
 
-/**
-  * @author Barry Becker
-  */
+
 object ConjugateGradientSolverSuite {
   private val MATRIX_4x4 = new GMatrix(4, 4, Array[Double](3, 1, 0, 0, 1, 4, 1, 3, 0, 1, 10, 0, 0, 3, 0, 3))
 }

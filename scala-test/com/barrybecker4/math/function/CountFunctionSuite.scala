@@ -3,9 +3,7 @@ package com.barrybecker4.math.function
 
 import scala.compiletime.uninitialized
 
-/**
-  * @author Barry Becker
-  */
+
 class CountFunctionSuite extends BaseFunctionSuite {
 
   /** instance under test */

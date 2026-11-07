@@ -8,7 +8,6 @@ import java.util
   * Provide support for high dimensional arrays of doubles.
   * Eventually this class should support multi-dimensional arrays of any type, but  for now it only supports doubles.
   * Use this class when you need to create an arbitrarily sized array of &gt; 1 dimension.
-  * @author Barry Becker
   */
 class MultiArray(val dims: Array[Int]) {
 

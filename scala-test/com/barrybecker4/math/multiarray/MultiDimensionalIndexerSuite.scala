@@ -5,9 +5,7 @@ import org.scalatest.funsuite.AnyFunSuite
 import scala.compiletime.uninitialized
 
 
-/**
-  * @author Barry Becker
-  */
+
 class MultiDimensionalIndexerSuite extends AnyFunSuite {
   
   /** instance under test */

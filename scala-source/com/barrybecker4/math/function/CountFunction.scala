@@ -14,7 +14,6 @@ object CountFunction {
 /**
   * Tracks a positive integer over time. For example, it might be used to track a population count.
   * @param initialYValue y value for x=0
-  * @author Barry Becker
   */
 class CountFunction(val initialYValue: Double) extends Function {
   protected val xValues: ListBuffer[Double] = ListBuffer.empty

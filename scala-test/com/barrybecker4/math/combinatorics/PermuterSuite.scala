@@ -5,9 +5,7 @@ import org.scalatest.funsuite.AnyFunSuite
 import scala.compiletime.uninitialized
 
 
-/**
-  * @author Barry Becker
-  */
+
 class PermuterSuite extends AnyFunSuite {
   /** instance under test */
   private var permuter: Permuter = uninitialized

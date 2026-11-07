@@ -8,7 +8,6 @@ import org.scalatest.funsuite.AnyFunSuite
 
 /**
   * Characterization tests for [[ComplexNumberRange]].
-  * @author Barry Becker
   */
 class ComplexNumberRangeSuite extends AnyFunSuite {
 

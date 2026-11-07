@@ -10,7 +10,6 @@ object FunctionInverter {
 
 /** Use to find the inverse of a given function
   * @param functionMap the monotonically increasing values of the function to invert assuming domain is [0,1]
-  * @author Barry Becker
   */
 class FunctionInverter(var functionMap: Array[Double]) {
 

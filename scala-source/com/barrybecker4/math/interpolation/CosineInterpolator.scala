@@ -1,9 +1,7 @@
 /* Copyright by Barry G. Becker, 2000-2018. Licensed under MIT License: http://www.opensource.org/licenses/MIT */
 package com.barrybecker4.math.interpolation
 
-/**
-  * @author Barry Becker
-  */
+
 class CosineInterpolator(function: Array[Double]) extends AbstractSmoothInterpolator(function) {
   /**
     * Cosine interpolate between 2 values in the function that is defined as a double array.

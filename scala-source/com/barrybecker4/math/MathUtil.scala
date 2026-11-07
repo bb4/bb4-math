@@ -11,7 +11,6 @@ import scala.util.Random
 
 /**
   * Some supplemental mathematics routines.
-  * @author Barry Becker
   */
 object MathUtil {
   /** Java double precision cannot accurately represent more than 16 decimal places */

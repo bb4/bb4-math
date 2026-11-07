@@ -7,7 +7,6 @@ import scala.collection.mutable.ArrayBuffer
 
 /**
   * The min and max cut-points will be nice round numbers.
-  * @author Barry Becker
   */
 class LooseCutPointFinder extends AbstractCutPointFinder {
 

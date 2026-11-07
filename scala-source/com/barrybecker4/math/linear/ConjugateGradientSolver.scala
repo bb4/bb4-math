@@ -16,7 +16,6 @@ object ConjugateGradientSolver {
   * For other sort of matrices, gaussian elimination may work better.
   * @param matrix A in Ax = b
   * @param b      the b vector in Ax = b
-  * @author Barry Becker
   */
 class ConjugateGradientSolver(var matrix: GMatrix, var b: GVector) {
   private var eps = ConjugateGradientSolver.DEFAULT_EPS

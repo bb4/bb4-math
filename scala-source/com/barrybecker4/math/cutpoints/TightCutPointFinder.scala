@@ -9,7 +9,6 @@ import scala.collection.mutable.ArrayBuffer
 /**
   * The min and max cut-points will be specific full precision numbers.
   *
-  * @author Barry Becker
   */
 object TightCutPointFinder {
   /** Labels should not get closer to each other than this percentage of total. */

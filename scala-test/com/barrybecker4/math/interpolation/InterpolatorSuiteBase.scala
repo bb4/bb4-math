@@ -6,9 +6,7 @@ import org.scalatest.funsuite.AnyFunSuite
 import scala.compiletime.uninitialized
 
 
-/**
-  * @author Barry Becker
-  */
+
 abstract class InterpolatorSuiteBase extends AnyFunSuite {
 
   /** interpolation class under test. */

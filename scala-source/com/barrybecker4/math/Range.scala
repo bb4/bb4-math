@@ -3,7 +3,6 @@ package com.barrybecker4.math
 
 /**
   * A double precision range.
-  * @author Barry Becker
   */
 case class Range(min: Double = Double.NaN, max: Double = Double.NaN) {
 

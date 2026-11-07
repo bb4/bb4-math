@@ -9,7 +9,6 @@ import com.barrybecker4.math.interpolation.LinearInterpolator
   * Represents a general y values function. It does not have to be monotonic or 1-1.
   * @param yValues the y values.
   * @param domain the extent of the regularly spaced x axis values
-  * @author Barry Becker
   */
 class HeightFunction(val yValues: Array[Double],
                      var domain: Range = Range(0, 1.0)) extends Function {

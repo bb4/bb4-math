@@ -9,7 +9,6 @@ import java.util
   * It does not actually allocate memory for the large dimensional array. That is up to the client app to manage.
   * Can be used to create an arbitrarily sized array of &gt; 1 dimension.
   *
-  * @author Barry Becker
   */
 class MultiDimensionalIndexer(val dimensions: Array[Int]) {
 

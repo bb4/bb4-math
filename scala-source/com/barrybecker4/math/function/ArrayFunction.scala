@@ -11,7 +11,6 @@ import com.barrybecker4.math.interpolation.{InterpolationMethod, LINEAR}
   *                    for a set of equally spaced x values in the range [0, 1]
   * @param inverseFunctionMap The inverse lookup for the main function.
   * @param interpMethod method to use for interpolating array values
-  * @author Barry Becker
   */
 class ArrayFunction(val functionMap: Array[Double],
                     val inverseFunctionMap: Array[Double],

@@ -3,6 +3,5 @@ package com.barrybecker4.math.interpolation
 
 /**
   * Use to interpolate between values on a function defined only at discrete points.
-  * @author Barry Becker
   */
 abstract class AbstractInterpolator(val function: Array[Double]) extends Interpolator
