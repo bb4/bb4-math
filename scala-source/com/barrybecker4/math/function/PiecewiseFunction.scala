@@ -16,6 +16,10 @@ import com.barrybecker4.math.Range
 class PiecewiseFunction(val xValues: Array[Double], val yValues: Array[Double]) extends InvertibleFunction {
   assert(this.xValues.length == this.yValues.length)
   assert(this.xValues.length >= 1)
+  assert(
+    this.xValues.indices.tail.forall(i => this.xValues(i) > this.xValues(i - 1)),
+    "xValues must be strictly increasing"
+  )
 
   override def getValue(value: Double): Double =
     interpolateAlong(xValues, yValues, value)

@@ -10,11 +10,39 @@ object ComplexNumber {
   val i: ComplexNumber = ComplexNumber(0, 1.0)
   val NaN: ComplexNumber = ComplexNumber(Double.NaN, Double.NaN)
 
-  /** @return the result of dividing c1 by c2. */
+  /**
+    * Divide c1 by c2.
+    * The textbook formula is used when every product fits in a Double, which keeps
+    * moderate inputs bit-for-bit with the historical result. When `c² + d²` (or a
+    * numerator product) overflows, Smith's method scales by the larger divisor
+    * component so `|c2|²` is never formed.
+    * @return the result of dividing c1 by c2.
+    */
   def divide(c1: ComplexNumber, c2: ComplexNumber): ComplexNumber = {
-    val r = (c1.real * c2.real + c1.imaginary * c2.imaginary) / (c2.real * c2.real + c2.imaginary * c2.imaginary)
-    val i = (c1.imaginary * c2.real - c1.real * c2.imaginary) / (c2.real * c2.real + c2.imaginary * c2.imaginary)
-    ComplexNumber(r, i)
+    val a = c1.real
+    val b = c1.imaginary
+    val c = c2.real
+    val d = c2.imaginary
+    val denom = c * c + d * d
+    val realNum = a * c + b * d
+    val imagNum = b * c - a * d
+    if (realNum.isFinite && imagNum.isFinite && denom.isFinite)
+      ComplexNumber(realNum / denom, imagNum / denom)
+    else
+      divideScaled(a, b, c, d)
+  }
+
+  /** Smith's complex division. `c` and `d` are the divisor's real and imaginary parts. */
+  private def divideScaled(a: Double, b: Double, c: Double, d: Double): ComplexNumber = {
+    if (Math.abs(d) <= Math.abs(c)) {
+      val ratio = d / c
+      val den = c + d * ratio
+      ComplexNumber((a + b * ratio) / den, (b - a * ratio) / den)
+    } else {
+      val ratio = c / d
+      val den = d + c * ratio
+      ComplexNumber((a * ratio + b) / den, (b * ratio - a) / den)
+    }
   }
 
   /** @return the sum of two complex numbers.*/
@@ -84,8 +112,8 @@ object ComplexNumber {
 
 case class ComplexNumber(real: Double, imaginary: Double = 0) {
 
-  /** Euclidean distance from the origin. */
-  def getMagnitude: Double = Math.sqrt(real * real + imaginary * imaginary)
+  /** Euclidean distance from the origin. `hypot` scales so large components do not overflow. */
+  def getMagnitude: Double = Math.hypot(real, imaginary)
   def negate: ComplexNumber = ComplexNumber(-real, -imaginary)
 
   /** @return the sum of this number plus another. */
@@ -111,11 +139,19 @@ case class ComplexNumber(real: Double, imaginary: Double = 0) {
     else if (n == 0) ComplexNumber(1)
     else (1 until n).foldLeft(this)((v, _) => v.multiply(this))
 
-  /** Squared Euclidean norm (real² + imaginary²); used by [[reciprocal]]. */
+  /** Squared Euclidean norm (real² + imaginary²). */
   def magnitude: Double = real * real + imaginary * imaginary
 
-  /** @return the reciprocal - which is 1/c */
-  def reciprocal: ComplexNumber = ComplexNumber(real / magnitude, -imaginary / magnitude)
+  /**
+    * @return the reciprocal, 1/c.
+    * When `real² + imaginary²` overflows, fall back to Smith's scaled division
+    * so a large finite input does not collapse to zero.
+    */
+  def reciprocal: ComplexNumber = {
+    val mag2 = magnitude
+    if (mag2.isFinite) ComplexNumber(real / mag2, -imaginary / mag2)
+    else ComplexNumber.divide(ComplexNumber(1), this)
+  }
 
   def isNaN: Boolean = real.isNaN || imaginary.isNaN
   def isInfinite: Boolean = real.isInfinite || imaginary.isInfinite

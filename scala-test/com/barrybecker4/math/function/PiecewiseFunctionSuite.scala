@@ -27,4 +27,16 @@ class PiecewiseFunctionSuite extends AnyFunSuite {
     assert(f.getInverseValue(-1.0) === 0.0)
     assert(f.getInverseValue(100.0) === 2.0)
   }
+
+  test("unsorted x values are rejected") {
+    assertThrows[AssertionError] {
+      new PiecewiseFunction(Array(1.0, 0.0, 2.0), Array(0.0, 1.0, 2.0))
+    }
+  }
+
+  test("duplicate x values are rejected") {
+    assertThrows[AssertionError] {
+      new PiecewiseFunction(Array(0.0, 1.0, 1.0), Array(0.0, 10.0, 30.0))
+    }
+  }
 }

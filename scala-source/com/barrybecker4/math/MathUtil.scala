@@ -106,14 +106,17 @@ object MathUtil {
     */
   def permutation(a: Int, b: Int): Long = {
     assert(a > 0)
-    assert(a > b)
-    var f = a
-    var anew = a - 1
-    while (anew > b) {
-      f *= anew
-      anew -= 1
+    if (a == b) 1L
+    else {
+      assert(a > b)
+      var f = a
+      var anew = a - 1
+      while (anew > b) {
+        f *= anew
+        anew -= 1
+      }
+      f
     }
-    f
   }
 
   /** Permutation function computes a!/b!.
