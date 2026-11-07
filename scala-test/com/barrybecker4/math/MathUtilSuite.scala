@@ -58,6 +58,11 @@ class MathUtilSuite extends AnyFunSuite {
     assertResult(210L) {MathUtil.permutation(7, 4)}
   }
 
+  test("permutation of n from n is one") {
+    assertResult(1L) { MathUtil.permutation(5, 5) }
+    assertResult(1L) { MathUtil.permutation(9, 9) }
+  }
+
   test("BigFactorialRatio7d4") {
     assertResult("210") { MathUtil.bigPermutation(7, 4).toString }
   }

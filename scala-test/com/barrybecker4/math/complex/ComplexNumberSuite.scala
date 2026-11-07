@@ -160,4 +160,21 @@ class ComplexNumberSuite extends AnyFunSuite {
   test("pow(0) is one") {
     assertResult(ComplexNumber(1)) { ComplexNumber(3, 4).pow(0) }
   }
+
+  test("large equal complexes divide to one") {
+    val z = ComplexNumber(1e200, 1e200)
+    assertResult(ComplexNumber(1)) { z.divide(z) }
+    assertResult(ComplexNumber(1)) { ComplexNumber.divide(z, z) }
+  }
+
+  test("reciprocal of a large equal complex stays finite") {
+    val z = ComplexNumber(1e200, 1e200)
+    assertResult(ComplexNumber(1.0 / (2.0 * 1e200), -1.0 / (2.0 * 1e200))) { z.reciprocal }
+  }
+
+  test("getMagnitude does not overflow for large components") {
+    assert(ComplexNumber(1e200, 0).getMagnitude === 1e200)
+    val mag = ComplexNumber(1e200, 1e200).getMagnitude
+    assert(Math.abs(mag / 1e200 - Math.sqrt(2.0)) < 1e-9)
+  }
 }

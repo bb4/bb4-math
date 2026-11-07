@@ -28,7 +28,7 @@ object LinearUtil {
       for (j <- 0 until matrix.getNumCol) {
         val a = matrix.getElement(i, j)
         if (a == 0) print("  0  ")
-        else print(a + ' ')
+        else print(s"$a ")
       }
       println()
     }
