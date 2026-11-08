@@ -5,7 +5,6 @@ import javax.vecmath.{GMatrix, GVector}
 
 object ConjugateGradientSolver {
   private val DEFAULT_EPS = 0.000001
-  private val DEFAULT_MAX_ITERATIONS = 8
 }
 
 /**
@@ -19,7 +18,8 @@ object ConjugateGradientSolver {
   */
 class ConjugateGradientSolver(val matrix: GMatrix, val b: GVector) {
   private var eps = ConjugateGradientSolver.DEFAULT_EPS
-  private var maxIterations = ConjugateGradientSolver.DEFAULT_MAX_ITERATIONS
+  /** Classic CG may need up to n iterations for an n×n SPD system; allow a small cushion. */
+  private var maxIterations = 2 * matrix.getNumRow
 
   def setEpsilon(e: Double): Unit = { eps = e }
   def setMaxIterations(num: Int): Unit = { maxIterations = num }
@@ -29,7 +29,7 @@ class ConjugateGradientSolver(val matrix: GMatrix, val b: GVector) {
     solve(new GVector(zeros))
   }
 
-  /** Find a solution or return the initial guess if something goes wrong.
+  /** Find a solution or throw if the residual does not fall below [[eps]] within [[maxIterations]].
     * @param initialGuess the initial guess for the solution x, x0
     * @return solution vector
     */
@@ -45,10 +45,7 @@ class ConjugateGradientSolver(val matrix: GMatrix, val b: GVector) {
     val rnew = new GVector(p)
     val pnew = new GVector(p)
     val matrixMultp = new GVector(p)
-    val matrixInverse = new GMatrix(matrix)
-    matrixInverse.invert()
-    var error = 1.0
-    var norm = .0
+    var error = Math.sqrt(r.dot(r))
     var iteration = 0
     while (error > eps && iteration < maxIterations) {
       matrixMultp.mul(matrix, p)
@@ -61,9 +58,7 @@ class ConjugateGradientSolver(val matrix: GMatrix, val b: GVector) {
       p.set(pnew)
       r.set(rnew)
       x.set(xnew)
-      rnew.mul(r, matrixInverse)
-      norm = rnew.dot(r)
-      error = norm * norm
+      error = Math.sqrt(r.dot(r))
       iteration += 1
     }
 

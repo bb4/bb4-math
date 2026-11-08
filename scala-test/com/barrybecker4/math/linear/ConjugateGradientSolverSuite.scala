@@ -52,4 +52,27 @@ class ConjugateGradientSolverSuite extends AnyFunSuite {
     solver.setMaxIterations(3)
     assertThrows[IllegalStateException] { solver.solve }
   }
+
+  /** Diagonal SPD with distinct eigenvalues; classic CG needs up to n steps from x0=0. */
+  test("solveLargerDiagonalSystemWithoutMatrixInverse") {
+    val n = 12
+    val data = Array.fill(n * n)(0.0)
+    val bData = Array.tabulate(n)(i => (i + 1).toDouble)
+    for (i <- 0 until n) data(i * n + i) = (i + 1).toDouble
+    val A = new GMatrix(n, n, data)
+    val b = new GVector(bData)
+    solver = new ConjugateGradientSolver(A, b)
+    // Old default maxIterations=8 cannot finish an n=12 system that needs ~n steps.
+    solver.setMaxIterations(8)
+    assertThrows[IllegalStateException] { solver.solve }
+
+    solver = new ConjugateGradientSolver(A, b)
+    val solution = solver.solve
+    val expected = new GVector(Array.fill(n)(1.0))
+    assertTrue(LinearUtil.appxVectorsEqual(expected, solution, 0.000001), "Unexpected solution:" + solution)
+
+    val ax = new GVector(n)
+    ax.mul(A, solution)
+    assertTrue(LinearUtil.appxVectorsEqual(b, ax, 0.000001), "Residual Ax-b too large for " + solution)
+  }
 }
