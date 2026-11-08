@@ -54,4 +54,14 @@ class MultiArraySuite extends AnyFunSuite {
     assertResult(24) { array.getNumValues }
     assertResult(3.4) { array.getRaw(13)}
   }
+
+  /**
+    * Wrapped Int product would under-allocate; reject instead of indexing as if size were 131073.
+    */
+  test("RejectDimensionProductThatWrapsAsInt") {
+    val dims = Array[Int](65537, 65537)
+    assertThrows[IllegalArgumentException] {
+      new MultiArray(dims)
+    }
+  }
 }

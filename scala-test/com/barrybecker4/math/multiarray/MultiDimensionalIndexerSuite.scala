@@ -69,6 +69,24 @@ class MultiDimensionalIndexerSuite extends AnyFunSuite {
     //assertResult("Unexpected index key (indexer)", "0,1,3", indexer.getIndexKey(new int[] {0, 1, 3}));
   }
 
+  /**
+    * 65537 * 65537 = 4_295_098_369, which overflows a signed Int (wrapping to 131073)
+    * but fits in a Long. Construction must fail rather than index a truncated size.
+    */
+  test("RejectDimensionProductThatWrapsAsInt") {
+    val dims = Array[Int](65537, 65537)
+    assertThrows[IllegalArgumentException] {
+      new MultiDimensionalIndexer(dims)
+    }
+  }
+
+  test("RejectDimensionProductThatOverflowsLong") {
+    val dims = Array[Int](Int.MaxValue, Int.MaxValue, Int.MaxValue)
+    assertThrows[IllegalArgumentException] {
+      new MultiDimensionalIndexer(dims)
+    }
+  }
+
   private def assertIndicesEqual(expIndices: Array[Int], indices: Array[Int]): Unit = {
     assert(expIndices === indices)
   }
