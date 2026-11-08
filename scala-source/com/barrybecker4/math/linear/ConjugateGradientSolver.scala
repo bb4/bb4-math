@@ -17,7 +17,7 @@ object ConjugateGradientSolver {
   * @param matrix A in Ax = b
   * @param b      the b vector in Ax = b
   */
-class ConjugateGradientSolver(var matrix: GMatrix, var b: GVector) {
+class ConjugateGradientSolver(val matrix: GMatrix, val b: GVector) {
   private var eps = ConjugateGradientSolver.DEFAULT_EPS
   private var maxIterations = ConjugateGradientSolver.DEFAULT_MAX_ITERATIONS
 

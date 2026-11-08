@@ -11,7 +11,7 @@ object FunctionInverter {
 /** Use to find the inverse of a given function
   * @param functionMap the monotonically increasing values of the function to invert assuming domain is [0,1]
   */
-class FunctionInverter(var functionMap: Array[Double]) {
+class FunctionInverter(val functionMap: Array[Double]) {
 
   private val length = functionMap.length
   private val lengthm1 = length - 1
