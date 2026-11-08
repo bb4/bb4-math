@@ -62,4 +62,23 @@ class RangeSuite extends AnyFunSuite {
     assert(-1.5 === range.min)
     assert(3.0 === range.max)
   }
+
+  test("MapToUnitScale typical") {
+    range = Range(2, 6)
+    assert(0.0 === range.mapToUnitScale(2))
+    assert(1.0 === range.mapToUnitScale(6))
+    assert(0.5 === range.mapToUnitScale(4))
+  }
+
+  test("MapToUnitScale zero extent") {
+    range = Range(5, 5)
+    assert(0.0 === range.mapToUnitScale(5))
+    assert(0.0 === range.mapToUnitScale(99))
+  }
+
+  test("MapToUnitScale empty NaN range") {
+    range = Range()
+    assert(range.mapToUnitScale(0).isNaN)
+    assert(range.mapToUnitScale(1).isNaN)
+  }
 }

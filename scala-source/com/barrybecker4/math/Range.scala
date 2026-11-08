@@ -30,8 +30,11 @@ case class Range(min: Double = Double.NaN, max: Double = Double.NaN) {
   /** @return true if the range is completely contained by us. */
   def inRange(range: Range): Boolean = range.min >= min && range.max <= max
 
-  /** @param value value to normalize on unit scale.
-    * @return normalized value assuming 0 for min. 1 for max.
+  /** Map a value onto the unit interval relative to this range.
+    * Returns 0 when the extent is 0 (`min == max`), avoiding division by zero.
+    * Returns `NaN` when the range is empty/undefined (default `Range()` with NaN min and max).
+    * @param value value to normalize on unit scale.
+    * @return normalized value assuming 0 for min, 1 for max.
     */
   def mapToUnitScale(value: Double): Double = {
     val range = getExtent
