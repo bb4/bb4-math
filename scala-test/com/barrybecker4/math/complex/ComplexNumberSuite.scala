@@ -3,6 +3,8 @@ package com.barrybecker4.math.complex
 
 import org.scalatest.funsuite.AnyFunSuite
 
+import scala.annotation.nowarn
+
 
 /**
  * @author Barry Becker
@@ -68,8 +70,24 @@ class ComplexNumberSuite extends AnyFunSuite {
     assertResult(ComplexNumber(1)) { ComplexNumber.pow(1, ComplexNumber(0, Math.PI)) }
   }
 
-  test("magnitude") {
-    assertResult(8.0) { ComplexNumber(2, 2).magnitude}
+  test("absSquared is real² + imaginary²") {
+    assertResult(8.0) { ComplexNumber(2, 2).absSquared }
+  }
+
+  test("abs is the Euclidean modulus") {
+    assertResult(5.0) { ComplexNumber(3, 4).abs }
+  }
+
+  test("deprecated magnitude still returns absSquared") {
+    @nowarn("cat=deprecation")
+    def deprecatedMagnitude(z: ComplexNumber): Double = z.magnitude
+    assertResult(ComplexNumber(2, 2).absSquared) { deprecatedMagnitude(ComplexNumber(2, 2)) }
+  }
+
+  test("deprecated getMagnitude still returns abs") {
+    @nowarn("cat=deprecation")
+    def deprecatedGetMagnitude(z: ComplexNumber): Double = z.getMagnitude
+    assertResult(ComplexNumber(3, 4).abs) { deprecatedGetMagnitude(ComplexNumber(3, 4)) }
   }
 
   test("reciprocal") {
@@ -172,9 +190,9 @@ class ComplexNumberSuite extends AnyFunSuite {
     assertResult(ComplexNumber(1.0 / (2.0 * 1e200), -1.0 / (2.0 * 1e200))) { z.reciprocal }
   }
 
-  test("getMagnitude does not overflow for large components") {
-    assert(ComplexNumber(1e200, 0).getMagnitude === 1e200)
-    val mag = ComplexNumber(1e200, 1e200).getMagnitude
+  test("abs does not overflow for large components") {
+    assert(ComplexNumber(1e200, 0).abs === 1e200)
+    val mag = ComplexNumber(1e200, 1e200).abs
     assert(Math.abs(mag / 1e200 - Math.sqrt(2.0)) < 1e-9)
   }
 }
