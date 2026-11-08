@@ -17,6 +17,15 @@ object MathUtil {
   val EPS = 0.0000000000000001
   val EPS_MEDIUM = 0.0000000001
   val EPS_BIG = 0.0001
+
+  /**
+    * Shared mutable [[Random]] seeded with `1` for reproducible sequences across callers.
+    *
+    * Not thread-safe: concurrent use from multiple threads can corrupt the generator state.
+    * Prefer constructing a local `new Random(...)` when you need isolation, a different seed,
+    * or concurrent access. Callers that intentionally share this instance (for example to
+    * reseed via `setSeed` for reproducible benchmarks) should serialize access themselves.
+    */
   val RANDOM = new Random(1)
 
   /** @param v the value to find log base 10 of.

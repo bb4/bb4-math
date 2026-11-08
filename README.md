@@ -16,7 +16,7 @@ See the [releases page](https://github.com/bb4/bb4-math/releases) or [Maven Cent
 
 ## What's inside
 
-- **`MathUtil`** — GCD/LCM, factorial, combinations/permutations, log10/exp10, and shared epsilon constants
+- **`MathUtil`** — GCD/LCM, factorial, combinations/permutations, log10/exp10, shared epsilon constants, and a fixed-seed shared `RANDOM` (not thread-safe; prefer a local `Random` when isolation matters)
 - **`Range`** — double-precision min/max range with extent, containment, and unit-scale mapping
 - **`cutpoints`** — nicely rounded tick/label positions for a numeric range (`CutPointGenerator`, tight vs. loose labeling)
 - **`interpolation`** — interpolate through an array of y-values (linear, cosine, cubic, Hermite, step)
