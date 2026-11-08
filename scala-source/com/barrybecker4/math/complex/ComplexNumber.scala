@@ -111,8 +111,31 @@ object ComplexNumber {
 
 case class ComplexNumber(real: Double, imaginary: Double = 0) {
 
-  /** Euclidean distance from the origin. `hypot` scales so large components do not overflow. */
-  def getMagnitude: Double = Math.hypot(real, imaginary)
+  /**
+    * Euclidean modulus `|z| = sqrt(real² + imaginary²)`.
+    * Uses `hypot` so large components do not overflow.
+    */
+  def abs: Double = Math.hypot(real, imaginary)
+
+  /**
+    * Squared Euclidean modulus `|z|² = real² + imaginary²`.
+    * Prefer this over [[abs]] when only the square is needed (for example in [[reciprocal]]),
+    * since it avoids a square-root.
+    */
+  def absSquared: Double = real * real + imaginary * imaginary
+
+  /**
+    * @deprecated use [[abs]]; kept for binary/source compatibility with published callers.
+    */
+  @deprecated("use abs", since = "2.1")
+  def getMagnitude: Double = abs
+
+  /**
+    * @deprecated use [[absSquared]]; this formerly returned `|z|²`, which is easy to confuse with [[abs]].
+    */
+  @deprecated("use absSquared", since = "2.1")
+  def magnitude: Double = absSquared
+
   def negate: ComplexNumber = ComplexNumber(-real, -imaginary)
 
   /** @return the sum of this number plus another. */
@@ -138,16 +161,13 @@ case class ComplexNumber(real: Double, imaginary: Double = 0) {
     else if (n == 0) ComplexNumber(1)
     else (1 until n).foldLeft(this)((v, _) => v.multiply(this))
 
-  /** Squared Euclidean norm (real² + imaginary²). */
-  def magnitude: Double = real * real + imaginary * imaginary
-
   /**
     * @return the reciprocal, 1/c.
     * When `real² + imaginary²` overflows, fall back to Smith's scaled division
     * so a large finite input does not collapse to zero.
     */
   def reciprocal: ComplexNumber = {
-    val mag2 = magnitude
+    val mag2 = absSquared
     if (mag2.isFinite) ComplexNumber(real / mag2, -imaginary / mag2)
     else ComplexNumber.divide(ComplexNumber(1), this)
   }
