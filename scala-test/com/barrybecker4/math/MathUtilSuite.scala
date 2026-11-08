@@ -35,6 +35,31 @@ class MathUtilSuite extends AnyFunSuite {
     assertResult(40L) { MathUtil.gcd(440L, -120L) }
   }
 
+  /** gcd(0, 0) is often left undefined or defined as 0; this library deliberately returns 1. */
+  test("gcd of zero and zero is one") {
+    assertResult(1L) { MathUtil.gcd(0L, 0L) }
+  }
+
+  test("lcm of typical values") {
+    assertResult(42L) { MathUtil.lcm(21L, 6L) }
+    assertResult(420L) { MathUtil.lcm(20L, 21L) }
+    assertResult(0L) { MathUtil.lcm(0L, 5L) }
+  }
+
+  /**
+    * Product a*b overflows Long, but the mathematical LCM still fits.
+    * Computing abs(a / gcd * b) instead of abs(a * b) / gcd avoids the intermediate overflow.
+    */
+  test("lcm avoids intermediate Long overflow when result fits") {
+    val a = 1L << 40 // 2^40
+    val b = 1L << 40
+    assertResult(1L << 40) { MathUtil.lcm(a, b) }
+
+    val c = 3221225472L // 2^30 * 3
+    val d = 5368709120L // 2^30 * 5
+    assertResult(16106127360L) { MathUtil.lcm(c, d) } // 2^30 * 15
+  }
+
   test("IntNeg") {
     assertResult(2) { 2.1.toInt }
     assertResult(0) { -0.1.toInt }
@@ -46,8 +71,17 @@ class MathUtilSuite extends AnyFunSuite {
     assertResult(24L) { MathUtil.factorial(4) }
   }
 
-  test("Factorial40") {
+  test("factorial of zero is one") {
+    assertResult(1L) { MathUtil.factorial(0) }
+  }
+
+  /** 20! is the largest factorial that fits in a signed 64-bit Long. */
+  test("Factorial20") {
     assertResult(2432902008176640000L) { MathUtil.factorial(20) }
+  }
+
+  test("factorial above 20 rejects Long overflow") {
+    assertThrows[IllegalArgumentException] { MathUtil.factorial(21) }
   }
 
   test("FactorialRatio4d3") {

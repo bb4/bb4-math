@@ -42,7 +42,10 @@ object MathUtil {
     */
   def exp10(v: Double): Double = Math.pow(10.0, v)
 
-  /** @return the greatest common divisor of 2 longs (may be negative).*/
+  /**
+    * Greatest common divisor of 2 longs (may be negative).
+    * Deliberately returns `1L` for `gcd(0, 0)` (often left undefined or defined as 0 elsewhere).
+    */
   @tailrec
   def gcd(a: Long, b: Long): Long =
     if (a == 0 && b == 0) 1L
@@ -54,11 +57,19 @@ object MathUtil {
     else if (b < a) gcd(b, a)
     else gcd(a, b % a)
 
-  /** @param a numberator
+  /**
+    * Least common multiple of a and b.
+    * Divides by the GCD before multiplying so intermediate `a * b` cannot overflow a Long
+    * when the mathematical LCM itself still fits. If the true LCM exceeds `Long.MaxValue`,
+    * the result may still wrap.
+    * @param a numerator
     * @param b denominator
     * @return the least common multiple of a and b
     */
-  def lcm(a: Long, b: Long): Long = Math.abs(a * b) / gcd(a, b)
+  def lcm(a: Long, b: Long): Long = {
+    val g = gcd(a, b)
+    Math.abs(a / g * b)
+  }
 
   /** Find the least common multiple of specified values.
     * @param values values to find least common multiple of
@@ -80,14 +91,21 @@ object MathUtil {
     numerator.divide(denominator)
   }
 
-  /** factorial function.
-    * 0! = 1 (http://www.zero-factorial.com/whatis.html)
-    * This could be a recursive function, but it would be slow and run out of memory for large num.
-    * @param num number to take factorial of
+  /**
+    * Factorial for values that fit in a signed 64-bit Long.
+    * 0! = 1 (http://www.zero-factorial.com/whatis.html).
+    * Safe only for `0` through `20` (`20!` = 2432902008176640000L is the largest that fits).
+    * For larger arguments use [[bigFactorial]]; `factorial(21)` and above throw rather than
+    * silently overflowing to a negative Long.
+    * @param num number to take factorial of (`0`..`20`)
     * @return num!
+    * @throws IllegalArgumentException if num &gt; 20
     */
   def factorial(num: Int): Long = {
     assert(num >= 0)
+    if (num > 20)
+      throw new IllegalArgumentException(
+        s"factorial($num) overflows Long; use bigFactorial for n > 20")
     if (num == 0) return 1
     var ct = num
     var f: Long = 1
