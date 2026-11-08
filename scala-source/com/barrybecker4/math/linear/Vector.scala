@@ -60,8 +60,20 @@ case class Vector(data: IndexedSeq[Double]) {
     Math.sqrt(data.zip(b.data).map {case (x, y) => (x - y) * (x - y)}.sum)
   }
 
-  /** @return magnitude of the vector. */
-  def magnitude: Double = Math.sqrt(data.map(x => x * x).sum)
+  /**
+    * @return magnitude of the vector.
+    * Scales by the largest absolute component before summing squares so that
+    * very large or very small components do not overflow or underflow to a
+    * useless magnitude (which would make [[normalize]] collapse to zero).
+    */
+  def magnitude: Double = {
+    val maxAbs = data.foldLeft(0.0)((m, x) => Math.max(m, Math.abs(x)))
+    if (maxAbs == 0.0) 0.0
+    else {
+      val sumSq = data.map { x => val t = x / maxAbs; t * t }.sum
+      maxAbs * Math.sqrt(sumSq)
+    }
+  }
 
   /** @return a vector in the same direction as this, but with unit magnitude (or zero if [[magnitude]] is 0). */
   def normalize: Vector = {

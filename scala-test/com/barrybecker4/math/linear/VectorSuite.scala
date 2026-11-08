@@ -52,6 +52,33 @@ class VectorSuite extends AnyFunSuite {
     assertResult(linear.Vector(IndexedSeq(0.0, 0.0))) { z.normalize }
   }
 
+  test("normalize large components yields unit vector") {
+    val unit = 1.0 / Math.sqrt(2.0)
+    val n = linear.Vector(IndexedSeq(1e200, 1e200)).normalize
+    assert(unit === n(0))
+    assert(unit === n(1))
+  }
+
+  test("normalize tiny components yields unit vector") {
+    val unit = 1.0 / Math.sqrt(2.0)
+    val n = linear.Vector(IndexedSeq(1e-200, 1e-200)).normalize
+    assert(unit === n(0))
+    assert(unit === n(1))
+  }
+
+  test("magnitude of large equal components does not overflow") {
+    val expected = 1e200 * Math.sqrt(2.0)
+    assert(expected === linear.Vector(IndexedSeq(1e200, 1e200)).magnitude)
+  }
+
+  test("magnitude of tiny equal components does not underflow to zero") {
+    val expected = 1e-200 * Math.sqrt(2.0)
+    val mag = linear.Vector(IndexedSeq(1e-200, 1e-200)).magnitude
+    assert(mag > 0.0)
+    // relative check: absolute EPS would treat 0 as equal to ~1e-200
+    assert(1.0 === mag / expected)
+  }
+
   test("DotProduct") {
     vector = linear.Vector(IndexedSeq[Double](3.0, 4.0))
     val vector2 = linear.Vector(IndexedSeq[Double](5.0, 12.0))
