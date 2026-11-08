@@ -23,14 +23,31 @@ class MultiDimensionalIndexer(val dimensions: Array[Int]) {
     throw new IllegalArgumentException("You must have > 0 dimension to use this class")
   if (numVals <= 0)
     throw new IllegalArgumentException("The product of the dimension lengths must be greater than 0. It was " + numVals)
+  if (numVals > Int.MaxValue)
+    throw new IllegalArgumentException(
+      "The product of the dimension lengths must not exceed " + Int.MaxValue +
+        ". It was " + numVals + " for dimensions " + util.Arrays.toString(dims))
 
   def getNumDims: Int = numDims
 
   /** @return the total number of values in the hypothetical array*/
   def getNumValues: Long = numVals
 
-  /** @return the product of the first n dimensions. returns 1 if n is 0 */
-  private def getDimensionProduct: Int = dims.product
+  /**
+    * Product of all dimension lengths, computed in 64-bit arithmetic.
+    * Throws if the product overflows a Long (Int overflow is rejected by the constructor).
+    * @return the product of the dimension lengths; 1 if there are no dimensions
+    */
+  private def getDimensionProduct: Long = {
+    try {
+      dims.foldLeft(1L)((acc, dim) => Math.multiplyExact(acc, dim.toLong))
+    } catch {
+      case _: ArithmeticException =>
+        throw new IllegalArgumentException(
+          "The product of the dimension lengths overflows a 64-bit integer. Dimensions were " +
+            util.Arrays.toString(dims))
+    }
+  }
 
   /** @param index n dimensional array of indices.
     * @return raw integer index from a integer array of indices.
