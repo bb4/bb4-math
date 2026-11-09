@@ -5,7 +5,6 @@ import org.scalatest.funsuite.AnyFunSuite
 import scala.compiletime.uninitialized
 
 
-
 class CombinaterSuite extends AnyFunSuite {
   /** instance under test */
   private var combinater: Combinater = uninitialized
@@ -18,16 +17,16 @@ class CombinaterSuite extends AnyFunSuite {
   test("Combinations1") {
     combinater = new Combinater(1)
     assert(combinater.hasNext)
-    assertResult(List(0)) { combinater.next }
+    assertResult(List(0)) { combinater.next() }
     assert(!combinater.hasNext)
   }
 
   test("Combinations2") {
     combinater = new Combinater(2)
     assert(combinater.hasNext)
-    assertResult(List(0)) { combinater.next }
-    assertResult(List(1)) { combinater.next }
-    assertResult( List(0, 1)) { combinater.next }
+    assertResult(List(0)) { combinater.next() }
+    assertResult(List(1)) { combinater.next() }
+    assertResult( List(0, 1)) { combinater.next() }
     assert(!combinater.hasNext)
   }
 
@@ -36,13 +35,13 @@ class CombinaterSuite extends AnyFunSuite {
     combinater = new Combinater(3)
     assertResult(7) { combinater.numCombinations}
     assert(combinater.hasNext)
-    assertResult(List(0)) { combinater.next }
-    assertResult(List(1)) { combinater.next}
-    assertResult(List(0, 1)) { combinater.next}
-    assertResult(List(2)) { combinater.next}
-    assertResult(List(0, 2)) { combinater.next}
-    assertResult(List(1, 2)) { combinater.next}
-    assertResult(List(0, 1, 2)) { combinater.next}
+    assertResult(List(0)) { combinater.next() }
+    assertResult(List(1)) { combinater.next()}
+    assertResult(List(0, 1)) { combinater.next()}
+    assertResult(List(2)) { combinater.next()}
+    assertResult(List(0, 2)) { combinater.next()}
+    assertResult(List(1, 2)) { combinater.next()}
+    assertResult(List(0, 1, 2)) { combinater.next()}
     assert(!combinater.hasNext)
   }
 
@@ -50,12 +49,12 @@ class CombinaterSuite extends AnyFunSuite {
   test("Combinations5") {
     combinater = new Combinater(5)
     assert(combinater.hasNext)
-    assertResult(List(0)) { combinater.next }
+    assertResult(List(0)) { combinater.next() }
     for (i <- 0 until 28)
-     combinater.next
+     combinater.next()
 
-    assertResult(List(1, 2, 3, 4)) { combinater.next }
-    assertResult(List(0, 1, 2, 3, 4)) { combinater.next }
+    assertResult(List(1, 2, 3, 4)) { combinater.next() }
+    assertResult(List(0, 1, 2, 3, 4)) { combinater.next() }
     assert(!combinater.hasNext)
   }
 
@@ -64,7 +63,7 @@ class CombinaterSuite extends AnyFunSuite {
     combinater = new Combinater(5)
     assertThrows[NoSuchElementException] {
       for (i <- 0 until 120)
-        combinater.next
+        combinater.next()
     }
   }
 
@@ -72,18 +71,18 @@ class CombinaterSuite extends AnyFunSuite {
   test("CombinationsReallyBig") {
     combinater = new Combinater(10)
     assert(combinater.hasNext)
-    combinater.next
-    assertResult(1) { combinater.next.size}
+    combinater.next()
+    assertResult(1) { combinater.next().size}
     assert(combinater.hasNext)
   }
 
   test("CombinationsReallyReallyBig") {
     combinater = new Combinater(20)
     assert(combinater.hasNext)
-    combinater.next
-    assertResult(1) { combinater.next.size }
-    assertResult(List(0, 1)) { combinater.next }
-    assertResult( List(2)) { combinater.next }
+    combinater.next()
+    assertResult(1) { combinater.next().size }
+    assertResult(List(0, 1)) { combinater.next() }
+    assertResult( List(2)) { combinater.next() }
     assert(combinater.hasNext)
   }
 

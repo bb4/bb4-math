@@ -19,7 +19,7 @@ object MathUtil {
   val EPS_BIG = 0.0001
 
   /**
-    * Deprecated shared mutable [[Random]] seeded with `1` for reproducible sequences across callers.
+    * Deprecated shared mutable [[scala.util.Random]] seeded with `1` for reproducible sequences across callers.
     *
     * Not thread-safe: concurrent use from multiple threads can corrupt the generator state.
     * Prefer constructing a local `new Random(...)` when you need isolation, a different seed,
