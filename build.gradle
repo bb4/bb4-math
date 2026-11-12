@@ -12,3 +12,8 @@ bb4 {
     archivesBaseName.set('bb4-math')
     mainClass.set('com.barrybecker4.math.combinatorics.Combinater')
 }
+
+dependencies {
+    // Exposed in the public API (Point2d, GMatrix, …); no longer supplied by bb4.scala-library (#40).
+    api bb4Libs.vecmath
+}
