@@ -25,11 +25,11 @@ class NiceNumberRounderSuite extends AnyFunSuite {
   /** Rounder uses Math.log10/pow; results may differ in the last bit across JVMs. */
   implicit val doubleEq: Equality[Double] = TolerantNumerics.tolerantDoubleEquality(MathUtil.EPS_MEDIUM)
 
-  test("RoundNumberSmall(") {
+  test("RoundNumberSmall") {
     assert(0.001 === Rounder.roundDown(0.001234567))
   }
 
-  test("RoundNumberMediumUpper(") {
+  test("RoundNumberMediumUpper") {
     assert(10.0 === Rounder.roundDown(8.87653))
   }
 
@@ -55,27 +55,27 @@ class NiceNumberRounderSuite extends AnyFunSuite {
     assert(200000000000.0 === Rounder.roundDown(172034506708.90123))
   }
 
-  test("CielNumberSmall") {
+  test("CeilNumberSmall") {
     assert(0.002 === Rounder.roundUp(0.001234567))
   }
 
-  test("CielNumberMediumUpper") {
+  test("CeilNumberMediumUpper") {
     assert(10.0 === Rounder.roundUp(8.87653))
   }
 
-  test("CielNumberMediumLower") {
+  test("CeilNumberMediumLower") {
     assert(5.0 === Rounder.roundUp(4.363))
   }
 
-  test("CielNumberLargeUpper") {
+  test("CeilNumberLargeUpper") {
     assert(200000000000.0 === Rounder.roundUp(172034506708.90123))
   }
 
-  test("CielNumberLargeLower") {
+  test("CeilNumberLargeLower") {
     assert(200000000000.0 === Rounder.roundUp(102034506708.90123))
   }
 
-  test("CieledNumber") {
+  test("CeiledNumber") {
     var index = 0
     for (inc <- 0 until 1000 by 30) {
       val value = BASE_VALUE + inc

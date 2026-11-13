@@ -23,34 +23,37 @@ abstract class AbstractCutPointFinder {
     * @return the cut points
     */
   def getCutPoints(range: Range, maxNumTicks: Int): Array[Double] = {
-    validateArguments(range)
-    val finalRange =
-      if (range.getExtent <= AbstractCutPointFinder.MIN_RANGE)
-        new Range(range).add(range.min + AbstractCutPointFinder.MIN_RANGE)
-      else new Range(range)
-    val positions = new ArrayBuffer[Double]()
-    if (finalRange.getExtent < AbstractCutPointFinder.MIN_RANGE)
-      positions += finalRange.min
-    else determineCutPoints(maxNumTicks, finalRange, positions)
-    positions.toArray
+    validateArguments(range, maxNumTicks)
+    if (range.getExtent <= AbstractCutPointFinder.MIN_RANGE) tinyRangeCutPoints(range)
+    else determineCutPoints(maxNumTicks, range)
   }
 
-  private def determineCutPoints(maxTicks: Int, finalRange: Range, positions: ArrayBuffer[Double]): Unit = {
-    val extent: Double = Rounder.roundUp(finalRange.getExtent)
-    val d: Double = Rounder.roundDown(extent / (maxTicks - 1))
-    val roundedRange: Range = Range(Math.floor(finalRange.min / d) * d, Math.ceil(finalRange.max / d) * d)
-    addPoints(positions, roundedRange, finalRange, d)
+  /** For a zero or tiny span, return endpoints only (expanding a zero span slightly). */
+  private def tinyRangeCutPoints(range: Range): Array[Double] = {
+    val max =
+      if (range.getExtent <= 0) range.min + AbstractCutPointFinder.MIN_RANGE
+      else range.max
+    Array(checkSmallNumber(range.min), checkSmallNumber(max))
+  }
+
+  private def determineCutPoints(maxTicks: Int, finalRange: Range): Array[Double] = {
+    val extent = Rounder.roundUp(finalRange.getExtent)
+    val step = Rounder.roundDown(extent / (maxTicks - 1))
+    val roundedRange = Range(Math.floor(finalRange.min / step) * step, Math.ceil(finalRange.max / step) * step)
+    val positions = new ArrayBuffer[Double]()
+    addPoints(positions, roundedRange, finalRange, step)
+    positions.toArray
   }
 
   protected def addPoints(positions: ArrayBuffer[Double], roundedRange: Range, finalRange: Range, d: Double): Unit
 
-  /** Verify that the min and max are valid.
-    * @param range range to check for NaN values.
-    */
-  private def validateArguments(range: Range): Unit = {
-    if (range.getExtent.isNaN) throw new IllegalArgumentException("Min cannot be greater than max for " + range)
+  /** Verify that the range and tick request are valid. */
+  private def validateArguments(range: Range, maxNumTicks: Int): Unit = {
+    require(maxNumTicks >= 2, s"maxNumTicks must be at least 2, but was $maxNumTicks")
     if (range.min.isNaN || range.min.isInfinite || range.max.isNaN || range.max.isInfinite)
       throw new IllegalArgumentException("Min or max of the range [" + range + "] is not a number.")
+    if (range.getExtent.isNaN)
+      throw new IllegalArgumentException("Min cannot be greater than max for " + range)
   }
 
   /** If real small just assume it is zero.

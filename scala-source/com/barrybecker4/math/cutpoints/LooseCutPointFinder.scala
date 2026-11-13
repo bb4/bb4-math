@@ -12,9 +12,7 @@ class LooseCutPointFinder extends AbstractCutPointFinder {
 
   override protected def addPoints(positions: ArrayBuffer[Double],
                                    roundedRange: Range, finalRange: Range, d: Double): Unit = {
-
-    val stop: Double = roundedRange.max + 0.5 * d
-
+    val stop = roundedRange.max + 0.5 * d
     for (x <- scala.collection.immutable.Range.BigDecimal(roundedRange.min, stop, d))
       positions.append(checkSmallNumber(x.toDouble))
   }

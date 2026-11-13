@@ -38,7 +38,7 @@ class RounderSuite extends AnyFunSuite {
     assert(50 === Rounder.roundUp(34.5))
   }
 
-  test("RoundMedium1Down(") {
+  test("RoundMedium1Down") {
     assert(50 === Rounder.roundDown(34.5))
   }
 

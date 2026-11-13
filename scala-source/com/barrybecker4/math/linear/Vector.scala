@@ -1,10 +1,10 @@
+/* Copyright by Barry G. Becker, 2000-2018. Licensed under MIT License: http://www.opensource.org/licenses/MIT */
 package com.barrybecker4.math.linear
 
 import com.barrybecker4.math.MathUtil
 
 /**
   * Represents an immutable N dimensional vector.
- *
   */
 case class Vector(data: IndexedSeq[Double]) {
   assert(data.nonEmpty)
@@ -29,7 +29,6 @@ case class Vector(data: IndexedSeq[Double]) {
   def normalizedDot(b: Vector): Double = {
     val magB = b.magnitude
     val magThis = this.magnitude
-    //println("for v1=" + this + "v2=" + b + " magThis=" + magThis + " magB=" + magB)
 
     val product = magThis * magB
     val divisor = if (product == 0) 1.0 else product
