@@ -4,6 +4,25 @@ package com.barrybecker4.math.function
 import com.barrybecker4.math.Range
 import com.barrybecker4.math.interpolation.{InterpolationMethod, LINEAR}
 
+
+object ArrayFunction {
+
+  /**
+    * Build a function from samples for forward evaluation only.
+    * Uses an identity-scale map as the inverse placeholder so construction never requires
+    * monotonicity. [[ArrayFunction.getInverseValue]] is not meaningful for non-monotonic data.
+    */
+  def fromSamples(samples: Array[Double], method: InterpolationMethod = LINEAR): ArrayFunction =
+    new ArrayFunction(samples, identityMap(samples.length), method)
+
+  /** Equally spaced values on [0, 1] with the given length (forward-only inverse placeholder). */
+  def identityMap(length: Int): Array[Double] = {
+    require(length >= 2, s"function samples length must be >= 2, was $length")
+    val last = length - 1
+    Array.tabulate(length)(i => i.toDouble / last)
+  }
+}
+
 /**
   * The function is represented with an array of lookups that
   * can be interpolated using some method.
@@ -35,6 +54,12 @@ class ArrayFunction(val functionMap: Array[Double],
   def this(func: Array[Double], inverseFunc: Array[Double]) = {
     this(func, inverseFunc, LINEAR)
   }
+
+  /**
+    * Same sample maps with a different interpolation method (does not recompute the inverse).
+    */
+  def withInterpolationMethod(method: InterpolationMethod): ArrayFunction =
+    new ArrayFunction(functionMap, inverseFunctionMap, method)
 
   /** Evaluate the function at the specified point.
     * @param value an x value
